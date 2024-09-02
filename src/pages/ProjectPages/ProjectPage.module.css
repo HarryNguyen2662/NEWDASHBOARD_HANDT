@@ -1,0 +1,122 @@
+.projectContainer {
+  padding: 16px;
+  min-height: 100vh;
+  background-color: black;
+  color: #f7f7f7;
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.backButton {
+  color: #4c4c4c;
+  font-size: 18px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.projectDetails {
+  padding-top: 16px;
+}
+
+.date {
+  margin-bottom: 8px;
+  color: #4c4c4c;
+}
+
+.projectName {
+  margin-bottom: 8px;
+}
+
+.company {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #f7f7f7;
+}
+
+.buttons {
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+}
+
+.badges {
+  display: inline-flex;
+  padding: 6px 4px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge {
+  padding: 8px 16px;
+  border-radius: 200px;
+  /* font-family: "PP Fraktion Mono"; */
+  font-size: 14px;
+}
+
+.inProgressButton {
+  align-self: flex-end;
+  background-color: #ffa300;
+  width: 354px;
+  float: right;
+  padding: 16px 2px;
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+  gap: 8px;
+  flex: 1 0 0;
+  border-radius: 10px;
+}
+
+.divider {
+  padding: 8px 0px;
+  height: 1px;
+}
+
+.aboutBusiness {
+  margin-bottom: 16px;
+}
+
+.aboutBusiness h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 700;
+}
+.aboutBusiness p {
+  margin-bottom: 16px;
+}
+
+.download {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 36px;
+  background-color: #4c4c4c;
+  width: 300px;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.projectDetailsSection h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.projectDetailsSection p {
+  margin-bottom: 16px;
+}
+
+.detailBox {
+  padding: 16px;
+  border-radius: 10px;
+  background-color: #121212;
+}
+
+.detailText {
+  font-weight: bold;
+}

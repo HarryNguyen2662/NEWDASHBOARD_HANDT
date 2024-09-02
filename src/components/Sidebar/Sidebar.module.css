@@ -1,0 +1,58 @@
+/* Sidebar.css */
+.sidebarContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 240px;
+  background-color: #121212;
+  height: 100vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  color: #fff; /* White text color */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.sidebar button {
+  background: none;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.sidebar button img {
+  width: 240px;
+  height: 40px;
+}
+
+.signoutImageHover {
+  display: none;
+}
+
+.signoutButton:hover .signoutImage {
+  display: none;
+}
+
+.signoutButton:hover .signoutImageHover {
+  display: block;
+}
+.sidebarFooter button {
+  background: none;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.signoutButton img {
+  width: 240px;
+  height: 40px;
+}

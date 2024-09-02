@@ -1,0 +1,100 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 16px;
+    width: 352px;
+    background: #121212;
+    border-radius: 8px;
+    color: #F7F7F7;
+  }
+  
+  .badgeContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  
+  .badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 10px;
+    border-radius: 200px;
+    font-family: 'PP Fraktion Mono', monospace;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0.5px;
+  }
+  
+  .badgeBlue {
+    background: #313F72;
+    color: #A8D0FF;
+  }
+  
+  .badgePurple {
+    background: #4F4162;
+    color: #C4A2FC;
+  }
+  
+  .projectName {
+    font-family: 'PP Fraktion Mono', monospace;
+    font-size: 24px;
+    line-height: 36px;
+    margin: 0;
+  }
+  
+  .description {
+    font-family: 'PP Fraktion Mono', monospace;
+    font-size: 14px;
+    line-height: 21px;
+    color: #CBCBCB;
+    margin: 0;
+  }
+  
+  .divider {
+    width: 100%;
+    border: 1px solid #4C4C4C;
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .userName {
+    font-family: 'PP Fraktion Mono', monospace;
+    font-size: 14px;
+    color: #CBCBCB;
+  }
+  
+  .button {
+    background-color: #f5a623; /* Background color */
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    color: #000000; /* Text color */
+    padding: 12px 24px; /* Padding to increase button size */
+    font-family: 'PP Fraktion Mono', monospace; /* Ensure the font is available */
+    font-size: 16px; /* Font size */
+    font-weight: 400; /* Font weight */
+    line-height: 23.78px; /* Line height */
+    text-align: center; /* Center text */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-decoration: none; /* Remove text underline */
+    display: inline-block; /* Align inline */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  }
+
+  .projectCard {
+    flex: 1 1 calc(33.33% - 20px);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+  }

@@ -1,0 +1,63 @@
+.connectionBox {
+  background-color: #121212;
+  border-radius: 8px;
+  padding: 24px;
+  width: 48%;
+}
+
+.connectionTitle {
+  font-family: "PP Fraktion Mono", monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+}
+
+.connectionSeeAll {
+  font-family: "PP Fraktion Mono", monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+  cursor: pointer;
+}
+
+.connectionItem {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  padding: 10px 0;
+}
+
+.connectionItem:last-child {
+  border-bottom: none;
+}
+
+.connectionName {
+  font-family: "PP Fraktion Mono", monospace;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f7f7f7;
+}
+
+.connectionItemTitle {
+  font-family: "PP Fraktion Mono", monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: #cbcbcb;
+}
+
+.connectionTag {
+  background-color: #333;
+  color: white;
+  font-family: "PP Fraktion Mono", monospace;
+  font-size: 12px;
+}
+
+.connectionButton {
+  background-color: #ffa300;
+  color: black;
+  font-family: "PP Fraktion Mono", monospace;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

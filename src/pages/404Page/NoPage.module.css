@@ -1,0 +1,46 @@
+.noPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      90deg,
+      #0f2240,
+      #36088e,
+      #280f6d,
+      #211053,
+      #111f44
+    )
+    no-repeat;
+  color: #ecf0f1;
+  height: 100vh;
+  position: relative;
+}
+
+.h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5%;
+}
+
+.return {
+  font-size: 1.875rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+  text-decoration: none;
+  transition-property: transform, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+.return:hover {
+  transform: scale(1.05);
+  color: #ffa300;
+  cursor: pointer;
+}

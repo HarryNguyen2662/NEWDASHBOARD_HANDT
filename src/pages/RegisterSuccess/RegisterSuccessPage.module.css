@@ -1,0 +1,39 @@
+.container {
+  width: 100vw;
+  max-height: 100vh;
+  height: 95vh;
+  display: grid;
+  background: linear-gradient(
+    90deg,
+    #0f2240,
+    #36088e,
+    #280f6d,
+    #211053,
+    #111f44
+  );
+  color: white;
+  font-family: "PP Fraktion Mono", monospace;
+  text-align: center;
+}
+
+.successCard {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 60px 113px;
+  background-color: var(--primary-black);
+  margin: auto;
+  border-radius: 1.5rem;
+  gap: 24px;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.logo {
+  width: 350px;
+  height: auto;
+}

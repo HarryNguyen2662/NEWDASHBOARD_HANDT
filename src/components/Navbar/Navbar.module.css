@@ -1,0 +1,120 @@
+/* Navbar.module.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #121212;
+  padding: 20px;
+  height: 60px;
+  position: relative;
+}
+
+.navbarLeft {
+  color: #003049;
+}
+
+.navbarRight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbarRight button:hover {
+  cursor: pointer;
+}
+
+.navbarRight p {
+  color: white;
+}
+
+.logo {
+  width: 216px;
+  height: 20.5px;
+}
+
+.signedIn {
+  display: flex;
+  flex-direction: row;
+}
+
+.loggedInUser {
+  display: flex;
+  align-items: center;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 16px;
+  color: white;
+}
+
+/* .navButton img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+} */
+
+.navButtonContainer:hover .navButton img {
+  content: url("../../assets/navbar/new-project-hover.png");
+}
+
+.navButtonContainer {
+  position: relative;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-right: -5px;
+}
+
+.navButtonContainer:hover .popupMenu {
+  display: block;
+}
+
+.popupMenu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  padding: 10px;
+  border: 0.6px solid #4c4c4c;
+  border-radius: 5px;
+  z-index: 1000;
+  width: 200px;
+  background-color: #121212; /* Background color */
+  color: #ffffff;
+}
+
+.popupMenu a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  font-family: "PP Fraktion Mono", monospace;
+  font-size: 16px;
+}
+
+.popupMenu a img {
+  margin-right: 10px;
+  height: 24px;
+  width: 24px;
+}
+
+.popupMenu a:hover {
+  color: #ffa300;
+}
+
+.popupMenu a:hover .createService {
+  content: url("../../assets/navbar/create-service-orange.svg");
+}
+
+.popupMenu a:hover .createProject {
+  content: url("../../assets/navbar/create-project-orange.svg");
+}
+
+.popupMenu hr {
+  border: 0;
+  border-top: 1px solid #333333;
+  margin: 5px 0;
+}
