@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import styles from "./LoginPage.module.css";
-import logo from "../../assets/CW3-logo-2.png";
+import logo from "../../assets/handtailogo.png";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { globalStore } from "../../globalsvar";
 
 import {
   useToast,
@@ -37,6 +38,7 @@ const LoginPage = () => {
           duration: 5000,
           isClosable: true,
         });
+        globalStore.set<string>("Main_Email", email);
         navigate("/");
       } else {
         toast({
@@ -57,16 +59,13 @@ const LoginPage = () => {
         duration: 5000,
         isClosable: true,
       });
-    } 
-  
+    }
   };
 
   const toast = useToast();
 
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
-
-  
 
   return (
     <Box className={styles.pageContainer}>
@@ -153,18 +152,17 @@ const LoginPage = () => {
               marginTop={4}
               onClick={() => {
                 handleLogin();
-                
               }}
             >
               Log in
             </Button>
           </div>
-          <div className={styles.subtext}>
+          {/*<div className={styles.subtext}>
             <Text>Don't have an account?</Text>
             <Link href={"/register"} paddingLeft={2}>
               Register here.
             </Link>
-          </div>
+          </div>*/}
         </form>
       </div>
     </Box>

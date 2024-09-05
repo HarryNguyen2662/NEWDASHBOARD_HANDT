@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./ProjectTable.module.css";
-import { completedIcon, inProgressIcon, inReviewIcon } from "../../assets/navbar";
-
+import {
+  completedIcon,
+  inProgressIcon,
+  inReviewIcon,
+} from "../../assets/navbar";
 
 interface Project {
   name: string;
@@ -19,15 +22,35 @@ interface ProjectTableProps {
 const getStatusIcon = (status: string) => {
   switch (status) {
     case "Completed":
-      return <img src={completedIcon} alt="Completed" className={styles.statusIcon} />;
+      return (
+        <img
+          src={completedIcon}
+          alt="Completed"
+          className={styles.statusIcon}
+        />
+      );
     case "In Progress":
-      return <img src={inProgressIcon} alt="In Progress" className={styles.statusIcon} />;
+      return (
+        <img
+          src={inProgressIcon}
+          alt="In Progress"
+          className={styles.statusIcon}
+        />
+      );
     case "In Review":
-      return <img src={inReviewIcon} alt="In Review" className={styles.statusIcon} />;
+      return (
+        <img src={inReviewIcon} alt="In Review" className={styles.statusIcon} />
+      );
     default:
-      return <img src={completedIcon} alt="Completed" className={styles.statusIcon} />;
+      return (
+        <img
+          src={completedIcon}
+          alt="Completed"
+          className={styles.statusIcon}
+        />
+      );
   }
-}
+};
 
 const ProjectTable: React.FC<ProjectTableProps> = ({ data }) => {
   const handleProjectsClick = (project: Project) => {

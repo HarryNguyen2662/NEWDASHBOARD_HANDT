@@ -1,1 +1,0 @@
-export { RegisterSuccessPage } from "./RegisterSuccessPage";

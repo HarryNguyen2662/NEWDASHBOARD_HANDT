@@ -4,8 +4,9 @@
   flex-direction: column;
   justify-content: space-between;
   width: 240px;
-  background-color: #121212;
   height: 100vh;
+  background: linear-gradient(135deg, #121212, #1d1d1d);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar {
@@ -55,4 +56,86 @@
 .signoutButton img {
   width: 240px;
   height: 40px;
+}
+
+.sidebarContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar {
+  flex: 1;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: white; /* Default color */
+  transition: color 0.3s, background-color 0.3s; /* Smooth transition */
+  position: relative;
+  margin-left: 15px;
+}
+
+.link .icon {
+  margin-right: 10px;
+}
+
+.link:hover,
+.link:focus,
+.link:active {
+  color: rgb(255, 149, 8); /* Color when hovered, focused, or active */
+  margin-left: 15px;
+}
+
+.active {
+  color: rgb(255, 149, 8); /* Color when active */
+}
+
+.stick {
+  width: 4px;
+  height: 100%;
+  background-color: transparent;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: background-color 0.3s;
+}
+
+.link:hover .stick,
+.link:focus .stick,
+.link:active .stick,
+.active .stick {
+  background-color: rgb(255, 149, 8); /* Color of the stick when active */
+}
+
+.sidebarFooter {
+  padding: 10px;
+}
+
+.signoutButton {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.signoutImage {
+  width: 20px;
+  height: 20px;
+}
+
+.signoutImageHover {
+  display: none;
+}
+
+.signoutButton:hover .signoutImage {
+  display: none;
+}
+
+.signoutButton:hover .signoutImageHover {
+  display: block;
 }

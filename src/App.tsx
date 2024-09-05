@@ -12,8 +12,6 @@ import PublicRoute from "./components/Routes/PublicRoute";
 import SingleProjectPage from "./pages/ProjectPages/SingleProjectPage";
 import AllProjectsPage from "./pages/ProjectPages/AllProjectsPage";
 import Dashboard from "./components/Dashboard/Dashboard";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import { RegisterSuccessPage } from "./pages/RegisterSuccess";
 import MemberSearchPage from "./pages/MemberSearchPage/MemberSearchPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
@@ -45,23 +43,6 @@ function App() {
           element={
             <PublicRoute>
               <LoginPage />
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <RegisterPage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/register-success"
-          element={
-            <PublicRoute>
-              <RegisterSuccessPage />
             </PublicRoute>
           }
         />

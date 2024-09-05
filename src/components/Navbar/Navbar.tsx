@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { useAuth } from "../../hooks/useAuth";
-import logo from "../../assets/cw3-logo.png";
+import logo from "../../assets/handtailogo.png";
 import styles from "./Navbar.module.css";
 import * as navbarIcons from "../../assets/navbar";
 import { CgProfile } from "react-icons/cg";
@@ -23,8 +23,14 @@ const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.navbarLeft}>
-        <ScrollLink to={"/"} smooth={true} duration={2000}>
+        <ScrollLink
+          to={"/"}
+          smooth={true}
+          duration={2000}
+          className={styles.scrollLink}
+        >
           <img src={logo} alt="Logo" className={styles.logo} />
+          <span className={styles.logoText}>H&T AI TECH</span>
         </ScrollLink>
       </div>
       <div className={styles.navbarRight}>

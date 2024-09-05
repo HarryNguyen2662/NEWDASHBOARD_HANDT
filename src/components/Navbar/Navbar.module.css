@@ -28,9 +28,27 @@
   color: white;
 }
 
+.logoContainer {
+  display: flex; /* Đặt logo và chữ nằm ngang nhau */
+  align-items: center; /* Căn giữa chữ và logo theo chiều dọc */
+}
+
 .logo {
-  width: 216px;
-  height: 20.5px;
+  width: auto;
+  height: 40px; /* Điều chỉnh chiều cao để phù hợp */
+  object-fit: contain;
+}
+
+.logoText {
+  font-size: 30px; /* Điều chỉnh kích thước chữ */
+  color: #fff; /* Màu trắng */
+  margin-left: 10px; /* Khoảng cách giữa logo và chữ */
+}
+
+.scrollLink {
+  display: flex; /* Đặt nội dung nằm ngang nhau */
+  align-items: center; /* Căn giữa chữ và logo theo chiều dọc */
+  text-decoration: none; /* Bỏ gạch chân mặc định nếu có */
 }
 
 .signedIn {

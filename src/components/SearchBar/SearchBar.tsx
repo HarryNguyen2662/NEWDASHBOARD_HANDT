@@ -33,7 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     <InputGroup width="100%">
       <Input
         type="text"
-        placeholder="Search by name, company, role"
+        placeholder="Tìm kiếm theo tên, mã giáo viên, hoặc các thông tin khác.."
         value={query}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}

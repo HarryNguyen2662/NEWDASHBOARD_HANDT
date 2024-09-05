@@ -1,5 +1,5 @@
-import { Databases, Query } from "appwrite";
-import { account, client, database } from "../lib/appwrite";
+/*import { Databases, Query } from "appwrite";
+import { account, client, database } from "../lib/supabase";
 
 interface Option {
   value: string;
@@ -66,3 +66,4 @@ class Searching {
 const searchingFunction = new Searching();
 
 export default searchingFunction;
+*/
