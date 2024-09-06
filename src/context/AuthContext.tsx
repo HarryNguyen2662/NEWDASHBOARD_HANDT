@@ -83,6 +83,7 @@ export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
       email,
       password,
     });
+    console.log(data);
     if (error) {
       console.error("Login failed", error);
       return { success: false, message: error.message };
@@ -90,7 +91,7 @@ export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
     setLoggedInUser(
       data.user ? { ...data.user, email: data.user.email || "" } : null
     );
-    return { success: true };
+    return { success: true, message: data.user?.email || "" };
   };
 
   const register = async (
@@ -111,7 +112,7 @@ export const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
     setLoggedInUser(
       data.user ? { ...data.user, email: data.user.email || "" } : null
     );
-    return { success: true };
+    return { success: true, message: data.user?.email || "" };
   };
 
   const logout = async (): Promise<void> => {

@@ -95,6 +95,7 @@ const LoginPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
+
             <div>
               <Text
                 as="label"
