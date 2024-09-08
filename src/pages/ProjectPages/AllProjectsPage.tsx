@@ -1,153 +1,128 @@
-import React, { useState } from "react";
-import styles from "../../components/Dashboard/Dashboard.module.css";
-import * as dashIcons from "../../assets/userMainPage";
-import ProjectCard from "../../components/ProjectCard/ProjectCard";
-import projectCardStyles from "../../components/ProjectCard/ProjectCard.module.css";
-import ProjectTable from "../../components/ProjectTable/ProjectTable";
+import React, { useState, useRef, useLayoutEffect } from "react";
+import {
+  Box,
+  Heading,
+  Button,
+  HStack,
+  Collapse,
+  useMediaQuery,
+  Tag,
+  TagLabel,
+  TagCloseButton,
+} from "@chakra-ui/react";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import HocVienTable from "../../components/HocVienTable/HocVienTable";
+import { TrungTamAPI } from "../../lib/API/API";
 
-// Define the type for project data
-interface ProjectData {
-  name: string;
-  provider: string;
-  date: string;
-  description: string;
-  type: string;
-  serviceArea: string;
-  status: string;
+//import { supabase } from "@/lib/supabase";
+//import searchingfunction from "../../services/searching";
+
+import { createClient } from "@supabase/supabase-js";
+
+interface Option {
+  value: string;
+  label: string;
 }
 
-const projectDummyDataFull: ProjectData[] = [
-  {
-    name: "Web Designer for E-Commerce Website",
-    provider: "Jane Doe",
-    description: "Need a web designer to create a modern e-commerce website",
-    date: "22 June 2024",
-    type: "Website",
-    serviceArea: "Website",
-    status: "Completed",
-  },
-  {
-    name: "Mobile App Development",
-    provider: "John Smith",
-    description:
-      "Looking for a mobile app developer to create an app for iOS and Android",
-    date: "15 July 2024",
-    type: "Mobile App",
-    serviceArea: "Development",
-    status: "In Progress",
-  },
-  {
-    name: "SEO Optimization",
-    provider: "Alice Johnson",
-    description:
-      "Need an SEO expert to optimize our website for search engines",
-    date: "05 August 2024",
-    type: "SEO",
-    serviceArea: "Marketing",
-    status: "In Review",
-  },
-  {
-    name: "Social Media Campaign",
-    provider: "Bob Brown",
-    description:
-      "Looking for a social media expert to run a marketing campaign",
-    date: "20 June 2024",
-    type: "Social Media",
-    serviceArea: "Marketing",
-    status: "Completed",
-  },
-  {
-    name: "Content Creation",
-    provider: "Charlie Davis",
-    description: "Need a content writer to create blog posts and articles",
-    date: "10 July 2024",
-    type: "Content",
-    serviceArea: "Writing",
-    status: "In Progress",
-  },
-  {
-    name: "Graphic Design",
-    provider: "Emily White",
-    description: "Looking for a graphic designer to create marketing materials",
-    date: "18 May 2024",
-    type: "Design",
-    serviceArea: "Creative",
-    status: "In Review",
-  },
-  {
-    name: "Email Marketing",
-    provider: "Michael Green",
-    description: "Need an email marketing expert to create email campaigns",
-    date: "30 June 2024",
-    type: "Email",
-    serviceArea: "Marketing",
-    status: "Completed",
-  },
-  {
-    name: "Database Management",
-    provider: "Olivia Brown",
-    description: "Looking for a database administrator to manage our database",
-    date: "12 July 2024",
-    type: "Database",
-    serviceArea: "IT",
-    status: "In Progress",
-  },
-  {
-    name: "UX Research",
-    provider: "Daniel Lee",
-    description: "Need a UX researcher to conduct user research",
-    date: "25 June 2024",
-    type: "Research",
-    serviceArea: "Design",
-    status: "In Review",
-  },
-  {
-    name: "System Integration",
-    provider: "Sophia Wilson",
-    description: "Looking for a system integrator to integrate our systems",
-    date: "03 August 2024",
-    type: "Integration",
-    serviceArea: "IT",
-    status: "Completed",
-  },
-];
-
-const projectDummyDataEmpty: ProjectData[] = [];
-
-const AllProjectsPage: React.FC = () => {
-  // Use state to manage project data
-  const [projects, setProjects] = useState<ProjectData[]>(projectDummyDataFull);
-  // THE BELOW CODE IS A PLACEHOLDER STILL NEED TO IMPLEMENT THE FUNCTIONALITY
-  // WHEN CONNECTED TO THE DATABASE
-
-  const renderProjectsLayout = () => {
-    const inProgressProjects = projects.filter(
-      (project) => project.status === "In Progress"
-    );
-
-    return (
-      <div className={styles.dashboardContainer}>
-        <div className={styles.currentProjects}>
-          <h1>Best Projects for You!</h1>
-          <div className={styles.projectCards}>
-            {inProgressProjects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                className={projectCardStyles.projectCard}
-                projectData={project}
-              />
-            ))}
-          </div>
-        </div>
-        <div className={styles.allProjects}>
-          <h1>All Projects</h1>
-          <ProjectTable data={projects} />
-        </div>
-      </div>
-    );
-  };
-
-  return <div>{renderProjectsLayout()}</div>;
+const generateMembers = async () => {
+  //let email = globalStore.get<string>("Main_Email");
+  const id = localStorage.getItem("Main_Id") || "";
+  const result = await TrungTamAPI.getTrungTamLISTHS(id);
+  console.log(result);
+  return result;
 };
 
-export default AllProjectsPage;
+const GiaoVienSearchPage: React.FC = () => {
+  const [selectedFilters, setSelectedFilters] = useState<Option[]>([]);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const [selectedInterest, setSelectedInterest] = useState<string | null>(null);
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const [members, setMembers] = useState<any[]>([]);
+  const parentRef = useRef<HTMLDivElement | null>(null);
+
+  const [isLargerThan1900] = useMediaQuery("(min-width: 1900px)");
+
+  useLayoutEffect(() => {
+    parentRef.current?.scrollTo(0, 0);
+  }, []);
+
+  useLayoutEffect(() => {
+    const fetchMembers = async () => {
+      const members = await generateMembers();
+      setMembers(members);
+    };
+    fetchMembers();
+  }, []);
+
+  const cardWidth = isLargerThan1900
+    ? isFilterOpen
+      ? "25%"
+      : "20%"
+    : isFilterOpen
+    ? "31.46%"
+    : "23.63%";
+
+  const cardHeight = "auto";
+  const rowGap = 20;
+
+  const cardsPerRow = isLargerThan1900
+    ? isFilterOpen
+      ? 4
+      : 5
+    : isFilterOpen
+    ? 3
+    : 4;
+
+  const rowVirtualizer = useVirtualizer({
+    count: Math.ceil(members.length / cardsPerRow),
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 380 + rowGap,
+    overscan: 5,
+  });
+
+  const handleSearch = async (query: string) => {
+    console.log("Search query:", query);
+    console.log("Selected Filters:", selectedFilters);
+    /*const result = await searchingfunction.search(query.trim());
+    console.log(result);
+    const searcheddata = await generateMembers(result);
+    setMembers(searcheddata);
+    setIsFilterOpen(false);
+    return result;*/
+  };
+
+  const clearFilters = () => {
+    setSelectedFilters([]);
+  };
+
+  const filteredMembers = selectedInterest
+    ? members.filter((member) => member.interests.includes(selectedInterest))
+    : members;
+
+  return (
+    <Box
+      display="flex"
+      flexDirection="row"
+      padding="4"
+      margin="0 auto"
+      textAlign="left"
+      height="102vh"
+    >
+      <Box flex="1" display="flex" flexDirection="column" height="100%">
+        <Heading as="h1" size="xl" marginBottom="6">
+          Danh sách học viên
+        </Heading>
+
+        <HStack marginX="2" marginBottom="4">
+          <Box width="100%">
+            <SearchBar onSearch={handleSearch} />
+          </Box>
+        </HStack>
+        <HocVienTable data={members} />
+      </Box>
+    </Box>
+  );
+};
+
+export default GiaoVienSearchPage;

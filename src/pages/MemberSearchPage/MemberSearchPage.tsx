@@ -31,8 +31,8 @@ interface Option {
 
 const generateMembers = async () => {
   //let email = globalStore.get<string>("Main_Email");
-  const email = localStorage.getItem("Main_Id") || "";
-  const result = await TrungTamAPI.getTrungTamLISTGV(email);
+  const id = localStorage.getItem("Main_Id") || "";
+  const result = await TrungTamAPI.getTrungTamLISTGV(id);
   return result;
 };
 
