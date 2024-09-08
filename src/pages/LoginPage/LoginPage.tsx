@@ -5,7 +5,7 @@ import logo from "../../assets/handtailogo.png";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { globalStore } from "../../globalsvar";
-
+import { TrungTamAPI } from "../../lib/API/API";
 import {
   useToast,
   Input,
@@ -38,7 +38,13 @@ const LoginPage = () => {
           duration: 5000,
           isClosable: true,
         });
+        localStorage.setItem("Main_Email", email);
         globalStore.set<string>("Main_Email", email);
+        TrungTamAPI.getTrungTamByEmail(email).then((res) => {
+          console.log(res);
+          localStorage.setItem("Main_Id", res[0].id);
+          globalStore.set<string>("Main_Id", res[0].id);
+        });
         navigate("/");
       } else {
         toast({

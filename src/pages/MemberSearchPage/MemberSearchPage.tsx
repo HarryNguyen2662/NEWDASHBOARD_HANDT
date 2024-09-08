@@ -29,58 +29,11 @@ interface Option {
   label: string;
 }
 
-interface GiaoVien {
-  id: string;
-  maGiaoVien: string;
-  maTrungTam: string;
-  tenGiaoVien: string;
-  soDienThoai: string;
-  ghiChu?: string;
-  ngayTao?: string;
-  ngayCapNhat?: string;
-  password?: string;
-}
-
-const fakeData: GiaoVien[] = [
-  {
-    id: "1",
-    maGiaoVien: "GV001",
-    maTrungTam: "TT001",
-    tenGiaoVien: "John Doe",
-    soDienThoai: "123-456-7890",
-    ghiChu: "Math teacher",
-  },
-  {
-    id: "2",
-    maGiaoVien: "GV002",
-    maTrungTam: "TT002",
-    tenGiaoVien: "Jane Smith",
-    soDienThoai: "098-765-4321",
-    ghiChu: "Science teacher",
-  },
-  {
-    id: "3",
-    maGiaoVien: "GV003",
-    maTrungTam: "TT003",
-    tenGiaoVien: "Alice Johnson",
-    soDienThoai: "555-555-5555",
-    ghiChu: "History teacher",
-  },
-  {
-    id: "4",
-    maGiaoVien: "GV004",
-    maTrungTam: "TT004",
-    tenGiaoVien: "Bob Brown",
-    soDienThoai: "444-444-4444",
-    ghiChu: "English teacher",
-  },
-];
-
 const generateMembers = async () => {
-  console.log(globalStore.get<string>("Main_Email"));
-  return TrungTamAPI.getTrungTamByEmail(
-    globalStore.get<string>("Main_Email") || ""
-  );
+  //let email = globalStore.get<string>("Main_Email");
+  const email = localStorage.getItem("Main_Id") || "";
+  const result = await TrungTamAPI.getTrungTamLISTGV(email);
+  return result;
 };
 
 const MemberSearchPage: React.FC = () => {
@@ -169,7 +122,7 @@ const MemberSearchPage: React.FC = () => {
             <SearchBar onSearch={handleSearch} />
           </Box>
         </HStack>
-        <GiaoVienTable data={fakeData} />
+        <GiaoVienTable data={members} />
       </Box>
     </Box>
   );

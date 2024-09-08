@@ -1,71 +1,34 @@
 import React from "react";
 import styles from "./GiaoVienTable.module.css";
-import {
-  completedIcon,
-  inProgressIcon,
-  inReviewIcon,
-} from "../../assets/navbar";
+import { Edit } from "lucide-react";
 
 interface GiaoVien {
+  ghi_chu: string;
   id: string;
-  maGiaoVien: string;
-  maTrungTam: string;
-  tenGiaoVien: string;
-  soDienThoai: string;
-  ghiChu?: string;
-  ngayTao?: string;
-  ngayCapNhat?: string;
-  password?: string;
+  ma_giao_vien: string;
+  ma_trung_tam: string;
+  ngay_cap_nhat: string;
+  ngay_tao: string;
+  password: string;
+  so_dien_thoai: string;
+  ten_giao_vien: string;
 }
 
 interface GiaoVienTableProps {
   data: GiaoVien[];
 }
 
-const getStatusIcon = (status: string) => {
-  switch (status) {
-    case "Completed":
-      return (
-        <img
-          src={completedIcon}
-          alt="Completed"
-          className={styles.statusIcon}
-        />
-      );
-    case "In Progress":
-      return (
-        <img
-          src={inProgressIcon}
-          alt="In Progress"
-          className={styles.statusIcon}
-        />
-      );
-    case "In Review":
-      return (
-        <img src={inReviewIcon} alt="In Review" className={styles.statusIcon} />
-      );
-    default:
-      return (
-        <img
-          src={completedIcon}
-          alt="Completed"
-          className={styles.statusIcon}
-        />
-      );
-  }
-};
-
 const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
-  const handleGiaoViensClick = (GiaoVien: GiaoVien) => {
-    console.log("GiaoVien clicked:", GiaoVien.tenGiaoVien);
-    alert(`GiaoVien clicked: ${GiaoVien.tenGiaoVien}`);
+  const handleGiaoVienClick = (giaoVien: GiaoVien) => {
+    console.log("Giáo viên clicked:", giaoVien.ten_giao_vien);
+    alert(`Giáo viên clicked: ${giaoVien.ten_giao_vien}`);
   };
 
-  const onButtonClick = (GiaoVien: GiaoVien) => {
-    console.log("Button clicked for:", GiaoVien.tenGiaoVien);
-    alert(`Button clicked for: ${GiaoVien.tenGiaoVien}`);
+  const onButtonClick = (giaoVien: GiaoVien, e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log("Button clicked for:", giaoVien.ten_giao_vien);
+    alert(`Button clicked for: ${giaoVien.ten_giao_vien}`);
   };
-
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
@@ -75,32 +38,25 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
             <th>Mã giáo viên</th>
             <th>Số điện thoại</th>
             <th>Ghi chú</th>
-            <th>Xem chi tiết/Chinh sửa</th>
+            <th>Xem chi tiết/Chỉnh sửa</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((GiaoVien, index) => (
-            <tr
-              key={GiaoVien.tenGiaoVien + index}
-              onClick={() => handleGiaoViensClick(GiaoVien)}
-              onKeyUp={() => {}}
-              onKeyDown={() => {}}
-              onKeyPress={() => {}}
-            >
-              <td>{GiaoVien.tenGiaoVien}</td>
-              <td>{GiaoVien.maGiaoVien}</td>
-              <td>{GiaoVien.soDienThoai}</td>
-              <td>{GiaoVien.ghiChu}</td>
+          {data.map((giaoVien) => (
+            <tr key={giaoVien.id} onClick={() => handleGiaoVienClick(giaoVien)}>
+              <td>{giaoVien.ten_giao_vien}</td>
+              <td>{giaoVien.ma_giao_vien}</td>
+              <td>{giaoVien.so_dien_thoai}</td>
+              <td>{giaoVien.ghi_chu}</td>
               <td>
-                <button onClick={() => onButtonClick(GiaoVien)}>
-                  "Xem chi tiết/Chinh sửa"
+                <button
+                  onClick={(e) => onButtonClick(giaoVien, e)}
+                  className="inline-flex items-center justify-center px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-colors duration-200"
+                >
+                  <Edit className="w-5 h-5 mr-2" />
+                  <span>Xem chi tiết/Chỉnh sửa</span>
                 </button>
               </td>
-              {/* New button */}
-              {/*
-              <td>{GiaoVien.serviceArea}</td>
-              <td>{getStatusIcon(GiaoVien.status)}</td>
-              */}
             </tr>
           ))}
         </tbody>
