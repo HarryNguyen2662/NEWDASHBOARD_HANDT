@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./GiaoVienTable.module.css";
 import { Edit } from "lucide-react";
-import { Button, ButtonGroup, Stack } from "@chakra-ui/react";
-
+import {
+  Button,
+  Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  FormControl,
+  FormLabel,
+  Input,
+  Box,
+  Grid,
+} from "@chakra-ui/react";
 interface GiaoVien {
   ghi_chu: string;
   id: string;
@@ -20,15 +35,15 @@ interface GiaoVienTableProps {
 }
 
 const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
-  const handleGiaoVienClick = (giaoVien: GiaoVien) => {
-    console.log("Giáo viên clicked:", giaoVien.ten_giao_vien);
-    alert(`Giáo viên clicked: ${giaoVien.ten_giao_vien}`);
-  };
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedGiaoVien, setSelectedGiaoVien] = useState<GiaoVien | null>(
+    null
+  );
 
   const onButtonClick = (giaoVien: GiaoVien, e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log("Button clicked for:", giaoVien.ten_giao_vien);
-    alert(`Button clicked for: ${giaoVien.ten_giao_vien}`);
+    setSelectedGiaoVien(giaoVien);
+    onOpen();
   };
   return (
     <div className={styles.tableContainer}>
@@ -71,7 +86,102 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
           ))}
         </tbody>
       </table>
+      {selectedGiaoVien && (
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
+            <ModalHeader>Chi tiết giáo viên</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <GiaoVienForm giaoVien={selectedGiaoVien} />
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="orange" mr={3} onClick={onClose}>
+                Đóng
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </div>
+  );
+};
+
+interface GiaoVienFormProps {
+  giaoVien: GiaoVien;
+}
+
+const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien }) => {
+  const [formValues, setFormValues] = useState(giaoVien);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  return (
+    <Box display="flex" flexDirection="column" gap={4}>
+      <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+        <FormControl mb={4} width="100%">
+          <FormLabel>Tên giáo viên: {formValues.ten_giao_vien}</FormLabel>
+          <Input
+            id="ten_giao_vien"
+            name="ten_giao_vien"
+            type="text"
+            value={formValues.ten_giao_vien}
+            onChange={handleChange}
+            placeholder="Tên giáo viên"
+          />
+        </FormControl>
+        <FormControl mb={4} width="100%">
+          <FormLabel>Mã giáo viên: {formValues.ma_giao_vien}</FormLabel>
+          <Input
+            id="ma_giao_vien"
+            name="ma_giao_vien"
+            type="text"
+            value={formValues.ma_giao_vien}
+            onChange={handleChange}
+            placeholder="Mã giáo viên"
+          />
+        </FormControl>
+        <FormControl mb={4} width="100%">
+          <FormLabel>Số điện thoại: {formValues.so_dien_thoai}</FormLabel>
+          <Input
+            id="so_dien_thoai"
+            name="so_dien_thoai"
+            type="text"
+            value={formValues.so_dien_thoai}
+            onChange={handleChange}
+            placeholder="Số điện thoại"
+          />
+        </FormControl>
+        <FormControl mb={4} width="100%">
+          <FormLabel>Mã trung tâm: {formValues.ma_trung_tam}</FormLabel>
+          <Input
+            id="ma_trung_tam"
+            name="ma_trung_tam"
+            type="text"
+            value={formValues.ma_trung_tam}
+            onChange={handleChange}
+            placeholder="Mã trung tâm"
+          />
+        </FormControl>
+        <FormControl mb={4} width="100%">
+          <FormLabel>Password</FormLabel>
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            value={formValues.password}
+            onChange={handleChange}
+            placeholder="Password"
+          />
+        </FormControl>
+      </Grid>
+    </Box>
   );
 };
 
