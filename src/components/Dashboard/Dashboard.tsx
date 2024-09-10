@@ -21,54 +21,6 @@ import ConnectionDashboard, {
   PeopleToConnect,
 } from "../ConnectionDashboard/ConnectionDashboard";
 
-// Define the type for project data
-// interface ProjectData {
-//   name: string;
-//   provider: string;
-//   date: string;
-//   description: string;
-//   type: string;
-//   serviceArea: string;
-//   status: string;
-// }
-
-const generateMemberId = (name: string) => {
-  return name.replace(/\s+/g, "");
-};
-
-const peopleToConnect: PeopleToConnect[] = [
-  {
-    name: "Jane Doe",
-    title: "Software Engineer at CW3",
-    tags: ["Mentorship", "NFTs", "Web3"],
-    memberId: generateMemberId("Jane Doe"),
-  },
-  {
-    name: "John Smith",
-    title: "Software Engineer at CW3",
-    tags: ["Mentorship", "NFTs", "Web3"],
-    memberId: generateMemberId("John Smith"),
-  },
-  {
-    name: "Thomas Ray",
-    title: "Software Engineer at CW3",
-    tags: ["Mentorship", "NFTs", "Web3"],
-    memberId: generateMemberId("Thomas Ray"),
-  },
-  {
-    name: "Warren Doe",
-    title: "Software Engineer at CW3",
-    tags: ["Mentorship", "NFTs", "Web3"],
-    memberId: generateMemberId("Warren Doe"),
-  },
-  {
-    name: "Hope Park",
-    title: "Software Engineer at CW3",
-    tags: ["Mentorship", "NFTs", "Web3"],
-    memberId: generateMemberId("Hope Park"),
-  },
-];
-
 const Dashboard: React.FC = () => {
   return (
     <Flex direction="column" p={5} bg="black">

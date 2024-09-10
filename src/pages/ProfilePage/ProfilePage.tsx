@@ -1,259 +1,161 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
-  Tabs,
-  TabPanels,
-  TabPanel,
-  TabList,
-  Tab,
+  Heading,
+  Text,
+  Link,
+  VStack,
+  Spinner,
+  Flex,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Input,
+  useToast,
 } from "@chakra-ui/react";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-import ProfileIntroCard from "../../components/ProfileIntroCard/ProfileIntroCard";
-import ProfileResponseCard from "../../components/ProfileResponseCard/ProfileResponseCard";
-import { useNavigate } from "react-router-dom";
+import { ChevronLeftIcon, EditIcon } from "lucide-react";
+import { TrungTamAPI } from "../../lib/API/API";
+import { globalStore } from "../../globalsvar";
 
-// Define the type for project data
-interface ProfileData {
-  name: string;
-  location: string;
-  role: string;
+interface TrungTamData {
+  dia_chi: string;
+  email: string;
+  ghi_chu: string;
+  id: string;
+  ma_trung_tam: string;
+  ngay_cap_nhat: string;
+  ngay_cong_tac: string;
+  ngay_tao: string;
+  so_dien_thoai: string;
+  ten_trung_tam: string;
+  website: string;
+  [key: string]: string; // Add index signature
 }
-
-interface ResponseData {
-  title?: string;
-  selectionPrompts?: string[];
-  selectionResponses?: string[][];
-  openShortPrompts?: string[];
-  openShortResponses?: string[];
-  openLongPrompts?: string[];
-  openLongResponses?: string[];
-}
-
-const profileDummyDataFull: ProfileData[] = [
-  {
-    name: "Jane Doe",
-    location: "Los Angeles, CA",
-    role: "Senior Response Strategist",
-  },
-];
-
-const introDummyData: ResponseData[] = [
-  {
-    title: "Contact info",
-    openShortPrompts: ["Email", "Phone"],
-    openShortResponses: ["janedoe@cw3.org", "111-111-1111"],
-  },
-  {
-    title: "Social media",
-    openShortPrompts: ["Twitter", "LinkedIn"],
-    openShortResponses: ["@jane_doe", "linkedin.com/in/janedoe"],
-  },
-];
-
-const interestsDummyData = [
-  {
-    title: "Areas of interest",
-    selectionResponses: [["Cryptocurrency", "NFTs"]],
-  },
-  {
-    title: "Skills on offer",
-    selectionPrompts: [
-      "Skills or expertise you are open to providing to people in CW3?",
-    ],
-    selectionResponses: [["Mentorship", "Coding"]],
-  },
-  {
-    title: "Interest in Web3",
-    openLongPrompts: [
-      "How do you see faith integrating/intersecting in the Web3 space?",
-    ],
-    openLongResponses: ["My interest in Web3..."],
-  },
-];
-
-const communityDummyData = [
-  {
-    title: "Participation interests",
-    selectionPrompts: ["What would you like to participate in?"],
-    selectionResponses: [["Mentorship", "Prayer"]],
-  },
-  {
-    title: "Communications",
-    openLongPrompts: ["Preferred communication channel(s)", "Preferred video conference platform(s)"],
-    openLongResponses: ["Discord, WhatsApp", "Zoom"],
-  },
-  {
-    title: "Volunteer interests",
-    selectionPrompts: ["What would you like to help with?"],
-    selectionResponses: [["Community management", "Hosting gatherings"]],
-  },
-];
-
-const professionalDummyData = [
-  {
-    title: "Business/organization info",
-    openShortPrompts: ["Organization", "Service Area", "Role"],
-    openShortResponses: ["Christians in Web3", "Investment Prep", "Senior Response Strategist"],
-  },
-  {
-    title: "Collaboration interests",
-    openLongPrompts: [
-      "Do you have a current business that may need assistance?",
-      "Do you have a startup project that may need assistance?",
-      "Do you formally provide services to businesses or organizations?",
-    ],
-    openLongResponses: ["Rhoncus morbi et augue nec, in id ullamcorper at sit. Condimentum sit nunc in eros scelerisque sed. Commodo in viverra nunc, ullamcorper ut. Non, amet, aliquet scelerisque nullam sagittis, pulvinar.", "Yes. I have...", "Nope."],
-  },
-];
 
 const ProfilePage = () => {
-  // Use state to manage project data
-  const [projects, setProjects] = useState<ProfileData[]>(profileDummyDataFull);
-  const [introResponses, setIntroResponses] =
-    useState<ResponseData[]>(introDummyData);
-  const [ineterestsResponses, setInterestsResponses] =
-    useState<ResponseData[]>(interestsDummyData);
-  const [communityResponses, setCommunityResponses] =
-    useState<ResponseData[]>(communityDummyData);
-  const [professionalResponses, setProfessionalResponses] = useState<
-    ResponseData[]
-  >(professionalDummyData);
+  const [trungtamData, setTrungTamData] = useState<TrungTamData | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedData, setEditedData] = useState<TrungTamData | null>(null);
+  const toast = useToast();
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const email = localStorage.getItem("Main_Email");
+    if (email) {
+      TrungTamAPI.getTrungTamByEmail(email).then((res) => {
+        const data = res[0];
+        localStorage.setItem("Main_Id", data.id);
+        globalStore.set<string>("Main_Id", data.id);
+        setTrungTamData(data);
+        setEditedData(data);
+      });
+    }
+  }, []);
 
   const handleBackClick = () => {
-    navigate(-1); // Go back to the previous page
+    window.history.back();
   };
 
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleSaveClick = () => {
+    setTrungTamData(editedData);
+    setIsEditing(false);
+    toast({
+      title: "Profile updated",
+      description: "Your changes have been saved successfully.",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEditedData((prev) => (prev ? { ...prev, [name]: value } : null));
+  };
+
+  if (!trungtamData) {
+    return (
+      <Flex justify="center" align="center" minHeight="100vh">
+        <Spinner size="xl" />
+      </Flex>
+    );
+  }
+
   return (
-    <Box p={4} minHeight="100vh">
-      <Box ml={4} mt={3}>
+    <Box p={6} maxWidth="800px" margin="auto">
+      <Flex justifyContent="space-between" alignItems="center" mb={6}>
         <Button
-          variant="link"
-          color="#a0a0a0"
-          fontSize="18px"
-          fontWeight="400"
           leftIcon={<ChevronLeftIcon />}
           onClick={handleBackClick}
-          sx={{
-            textDecoration: "none",
-            _hover: {
-              textDecoration: "none",
-            },
-          }}
+          variant="ghost"
         >
           Back
         </Button>
-      </Box>
-      <Box>
-        {projects.map((project, index) => (
-          <ProfileIntroCard key={index} profileData={project} />
-        ))}
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          borderRadius: "8px",
-          marginTop: "20px",
-          padding: "20px",
-          background: "#121212",
-        }}
-      >
-        <Tabs
-          orientation="vertical"
-          width="100%"
-          sx={{
-            display: "flex",
-          }}
-        >
-          <TabList
-            sx={{
-              fontFamily: '"PP Fraktion Mono", monospace',
-              width: "240px",
-              paddingRight: "15px",
-              borderRight: "2px solid #4C4C4C",
-              borderLeft: "0px",
-              gap: "6px",
-            }}
-          >
-            <Tab
-              sx={{
-                padding: "16px",
-                borderRadius: "8px",
-                width: "100%",
-                height: "64px",
-                _selected: { bg: "#4900BC" },
-              }}
-            >
-              Overview
-            </Tab>
-            <Tab
-              sx={{
-                padding: "16px",
-                borderRadius: "8px",
-                width: "100%",
-                height: "64px",
-                _selected: { bg: "#4900BC" },
-              }}
-            >
-              Interests and expertise
-            </Tab>
-            <Tab
-              sx={{
-                padding: "16px",
-                borderRadius: "8px",
-                width: "100%",
-                height: "64px",
-                _selected: { bg: "#4900BC" },
-              }}
-            >
-              Community engagement
-            </Tab>
-            <Tab
-              sx={{
-                padding: "16px",
-                borderRadius: "8px",
-                width: "100%",
-                height: "64px",
-                _selected: { bg: "#4900BC" },
-              }}
-            >
-              Professional activity
-            </Tab>
-          </TabList>
+        {!isEditing && (
+          <Button leftIcon={<EditIcon />} onClick={handleEditClick}>
+            Edit Profile
+          </Button>
+        )}
+      </Flex>
 
-          <TabPanels>
-            <TabPanel>
-              <div>
-                {introResponses.map((response, index) => (
-                  <ProfileResponseCard key={index} responseData={response} />
-                ))}
-              </div>
-            </TabPanel>
+      <VStack spacing={6} align="stretch">
+        <Heading as="h1" size="xl" textAlign="center" mb={4}>
+          Center Profile
+        </Heading>
 
-            <TabPanel>
-              {ineterestsResponses.map((response, index) => (
-                <ProfileResponseCard key={index} responseData={response} />
-              ))}
-            </TabPanel>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th width="30%">Field</Th>
+              <Th>Value</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {Object.entries(trungtamData).map(([key, value]) => (
+              <Tr key={key}>
+                <Td fontWeight="bold">
+                  {key
+                    .replace(/_/g, " ")
+                    .replace(/\b\w/g, (char) => char.toUpperCase())}
+                </Td>
+                <Td>
+                  {isEditing ? (
+                    <Input
+                      name={key}
+                      value={editedData ? editedData[key] : ""}
+                      onChange={handleInputChange}
+                    />
+                  ) : key === "website" ? (
+                    <Link href={value} isExternal color="blue.500">
+                      {value}
+                    </Link>
+                  ) : (
+                    value
+                  )}
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
 
-            <TabPanel>
-              {communityResponses.map((response, index) => (
-                <ProfileResponseCard key={index} responseData={response} />
-              ))}
-            </TabPanel>
-
-            <TabPanel>
-              {professionalResponses.map((response, index) => (
-                <ProfileResponseCard key={index} responseData={response} />
-              ))}
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </Box>
+        {isEditing && (
+          <Flex justifyContent="flex-end" mt={4}>
+            <Button onClick={() => setIsEditing(false)} mr={3}>
+              Cancel
+            </Button>
+            <Button colorScheme="blue" onClick={handleSaveClick}>
+              Save Changes
+            </Button>
+          </Flex>
+        )}
+      </VStack>
     </Box>
   );
 };
