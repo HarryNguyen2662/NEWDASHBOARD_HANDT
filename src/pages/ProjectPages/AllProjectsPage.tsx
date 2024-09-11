@@ -13,7 +13,7 @@ import {
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import HocVienTable from "../../components/HocVienTable/HocVienTable";
-import { TrungTamAPI } from "../../lib/API/API";
+import { HocVienAPI, TrungTamAPI } from "../../lib/API/API";
 
 //import { supabase } from "@/lib/supabase";
 //import searchingfunction from "../../services/searching";
@@ -25,12 +25,14 @@ interface Option {
   label: string;
 }
 
-const generateMembers = async () => {
+const generateMembers = async (searching_data?: any[]) => {
   //let email = globalStore.get<string>("Main_Email");
-  const id = localStorage.getItem("Main_Id") || "";
-  const result = await TrungTamAPI.getTrungTamLISTHS(id);
-  console.log(result);
-  return result;
+  if (searching_data && searching_data.length > 0) return searching_data;
+  else {
+    const id = localStorage.getItem("Main_Id") || "";
+    const result = await TrungTamAPI.getTrungTamLISTHS(id);
+    return result;
+  }
 };
 
 const GiaoVienSearchPage: React.FC = () => {
@@ -84,12 +86,14 @@ const GiaoVienSearchPage: React.FC = () => {
   const handleSearch = async (query: string) => {
     console.log("Search query:", query);
     console.log("Selected Filters:", selectedFilters);
-    /*const result = await searchingfunction.search(query.trim());
+    const matrungtam = localStorage.getItem("Matrungtam");
+    console.log(matrungtam);
+    const result = await HocVienAPI.searchingHocVien(query, matrungtam ?? "");
     console.log(result);
     const searcheddata = await generateMembers(result);
     setMembers(searcheddata);
     setIsFilterOpen(false);
-    return result;*/
+    return result;
   };
 
   const clearFilters = () => {

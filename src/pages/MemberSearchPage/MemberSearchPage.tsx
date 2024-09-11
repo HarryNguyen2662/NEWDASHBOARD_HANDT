@@ -16,7 +16,7 @@ import FilterSection from "./FilterSection";
 import MemberCard from "../../components/MemberCard/MemberCard";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import GiaoVienTable from "../../components/GiaoVienTable/GiaoVienTable";
-import { TrungTamAPI } from "../../lib/API/API";
+import { TrungTamAPI, GiaoVienAPI } from "../../lib/API/API";
 import { globalStore } from "../../globalsvar";
 
 //import { supabase } from "@/lib/supabase";
@@ -29,13 +29,15 @@ interface Option {
   label: string;
 }
 
-const generateMembers = async () => {
+const generateMembers = async (searching_data?: any[]) => {
   //let email = globalStore.get<string>("Main_Email");
-  const id = localStorage.getItem("Main_Id") || "";
-  const result = await TrungTamAPI.getTrungTamLISTGV(id);
-  return result;
+  if (searching_data && searching_data.length > 0) return searching_data;
+  else {
+    const id = localStorage.getItem("Main_Id") || "";
+    const result = await TrungTamAPI.getTrungTamLISTGV(id);
+    return result;
+  }
 };
-
 const MemberSearchPage: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<Option[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
@@ -87,12 +89,14 @@ const MemberSearchPage: React.FC = () => {
   const handleSearch = async (query: string) => {
     console.log("Search query:", query);
     console.log("Selected Filters:", selectedFilters);
-    /*const result = await searchingfunction.search(query.trim());
+    const matrungtam = localStorage.getItem("Matrungtam");
+    console.log(matrungtam);
+    const result = await GiaoVienAPI.searchingGiaoVien(query, matrungtam ?? "");
     console.log(result);
     const searcheddata = await generateMembers(result);
     setMembers(searcheddata);
     setIsFilterOpen(false);
-    return result;*/
+    return result;
   };
 
   const clearFilters = () => {

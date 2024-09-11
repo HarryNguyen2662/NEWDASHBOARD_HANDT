@@ -101,6 +101,16 @@ export const GiaoVienAPI = {
       throw new Error("Failed to update Giao Vien");
     }
   },
+  searchingGiaoVien: async (keyword: string, matrungtam: string) => {
+    try {
+      return await fetchInstance(`/giaovien/searching`, {
+        method: "POST",
+        body: JSON.stringify({ keyword, matrungtam }),
+      });
+    } catch (error) {
+      throw new Error("Failed to search Giao Vien");
+    }
+  },
 };
 
 export const HocVienAPI = {
@@ -124,6 +134,16 @@ export const HocVienAPI = {
       });
     } catch (error) {
       throw new Error("Failed to update Hoc Vien");
+    }
+  },
+  searchingHocVien: async (keyword: string, matrungtam: string) => {
+    try {
+      return await fetchInstance(`/hocvien/searching`, {
+        method: "POST",
+        body: JSON.stringify({ keyword, matrungtam }),
+      });
+    } catch (error) {
+      throw new Error("Failed to search Hoc Vien");
     }
   },
 };
