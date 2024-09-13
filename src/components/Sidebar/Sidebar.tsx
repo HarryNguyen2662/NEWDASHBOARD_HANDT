@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
       label: "Trung tâm điều khiển",
     },
     {
-      to: "/members",
+      to: "/hocviens",
       icon: (
         <FaChalkboardTeacher
           className={styles.icon}
@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
       label: "Danh sách giáo viên",
     },
     {
-      to: "/projects",
+      to: "/giaoviens",
       icon: (
         <FaUserGraduate
           className={styles.icon}
@@ -47,7 +47,7 @@ const Sidebar: React.FC = () => {
       label: "Danh sách học viên",
     },
     {
-      to: "/services",
+      to: "/trungtam/hoso",
       icon: (
         <FaFileAlt className={styles.icon} style={{ marginLeft: "10px" }} />
       ), // File icon for "Hồ sơ trung tâm"

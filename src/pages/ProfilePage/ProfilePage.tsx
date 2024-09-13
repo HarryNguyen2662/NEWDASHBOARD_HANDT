@@ -33,8 +33,21 @@ interface TrungTamData {
   so_dien_thoai: string;
   ten_trung_tam: string;
   website: string;
-  [key: string]: string; // Add index signature
 }
+
+const fieldLabels: { [key in keyof TrungTamData]: string } = {
+  dia_chi: "Address",
+  email: "Email",
+  ghi_chu: "Note",
+  id: "ID",
+  ma_trung_tam: "Center Code",
+  ngay_cap_nhat: "Update Date",
+  ngay_cong_tac: "Work Date",
+  ngay_tao: "Creation Date",
+  so_dien_thoai: "Phone Number",
+  ten_trung_tam: "Center Name",
+  website: "Website",
+};
 
 const ProfilePage = () => {
   const [trungtamData, setTrungTamData] = useState<TrungTamData | null>(null);
@@ -66,6 +79,28 @@ const ProfilePage = () => {
   const handleSaveClick = () => {
     setTrungTamData(editedData);
     setIsEditing(false);
+    console.log(editedData);
+    /*await TrungTamAPI.updateTrungTam(
+      localStorage.getItem("Main_Id") || "",
+      editedData
+    );*/
+    const updateBody = {
+      matrungtam: editedData?.ma_trung_tam,
+      tentrungtam: editedData?.ten_trung_tam,
+      diachi: editedData?.dia_chi,
+      sodienthoai: editedData?.so_dien_thoai,
+      email: editedData?.email,
+      urlwebsite: editedData?.website,
+      ngaycongtac: editedData?.ngay_cong_tac,
+      ghichu: editedData?.ghi_chu,
+    };
+
+    TrungTamAPI.updateTrungTam(
+      localStorage.getItem("Main_Id") || "",
+      updateBody
+    ).then((res) => {
+      console.log(res);
+    });
     toast({
       title: "Profile updated",
       description: "Your changes have been saved successfully.",
@@ -121,15 +156,15 @@ const ProfilePage = () => {
             {Object.entries(trungtamData).map(([key, value]) => (
               <Tr key={key}>
                 <Td fontWeight="bold">
-                  {key
-                    .replace(/_/g, " ")
-                    .replace(/\b\w/g, (char) => char.toUpperCase())}
+                  {fieldLabels[key as keyof TrungTamData]}
                 </Td>
                 <Td>
                   {isEditing ? (
                     <Input
                       name={key}
-                      value={editedData ? editedData[key] : ""}
+                      value={
+                        editedData ? editedData[key as keyof TrungTamData] : ""
+                      }
                       onChange={handleInputChange}
                     />
                   ) : key === "website" ? (

@@ -76,7 +76,7 @@ const Navbar = () => {
             >
               <img src={navbarIcons.notifications} alt="Notifications" />
             </button> */}
-            <Link to="/members/janedoe" className={styles.navButton}>
+            <Link to="/trungtam/hoso" className={styles.navButton}>
               <CgProfile size={26} />
             </Link>
           </div>

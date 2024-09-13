@@ -31,10 +31,10 @@ function App() {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path="projects" element={<AllProjectsPage />} />
-          <Route path="projects/:projectId" element={<SingleProjectPage />} />
-          <Route path="members/:memberId" element={<ProfilePage />} />
-          <Route path="members" element={<MemberSearchPage />} />
+          <Route path="hocviens" element={<AllProjectsPage />} />
+          <Route path="hocviens/:hocvienId" element={<SingleProjectPage />} />
+          <Route path="trungtam/hoso" element={<ProfilePage />} />
+          <Route path="giaoviens" element={<MemberSearchPage />} />
           {/* <Route path="my-posts" element={<div>Your Posts</div>} /> */}
         </Route>
 
