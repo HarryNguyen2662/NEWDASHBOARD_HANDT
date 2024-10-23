@@ -32,12 +32,14 @@ interface Option {
 const generateMembers = async (searching_data?: any[]) => {
   //let email = globalStore.get<string>("Main_Email");
   if (searching_data && searching_data.length > 0) return searching_data;
+  // biome-ignore lint/style/noUselessElse: <explanation>
   else {
     const id = localStorage.getItem("Main_Id") || "";
     const result = await TrungTamAPI.getTrungTamLISTGV(id);
     return result;
   }
 };
+
 const MemberSearchPage: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<Option[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
@@ -98,14 +100,6 @@ const MemberSearchPage: React.FC = () => {
     setIsFilterOpen(false);
     return result;
   };
-
-  const clearFilters = () => {
-    setSelectedFilters([]);
-  };
-
-  const filteredMembers = selectedInterest
-    ? members.filter((member) => member.interests.includes(selectedInterest))
-    : members;
 
   return (
     <Box

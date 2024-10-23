@@ -29,22 +29,22 @@ const Sidebar: React.FC = () => {
     {
       to: "/hocviens",
       icon: (
-        <FaChalkboardTeacher
-          className={styles.icon}
-          style={{ marginLeft: "10px" }}
-        />
-      ), // Teacher icon for "Danh sách giáo viên"
-      label: "Danh sách giáo viên",
-    },
-    {
-      to: "/giaoviens",
-      icon: (
         <FaUserGraduate
           className={styles.icon}
           style={{ marginLeft: "10px" }}
         />
       ), // Graduate icon for "Danh sách học viên"
       label: "Danh sách học viên",
+    },
+    {
+      to: "/giaoviens",
+      icon: (
+        <FaChalkboardTeacher
+          className={styles.icon}
+          style={{ marginLeft: "10px" }}
+        />
+      ), // Teacher icon for "Danh sách giáo viên"
+      label: "Danh sách giáo viên",
     },
     {
       to: "/trungtam/hoso",

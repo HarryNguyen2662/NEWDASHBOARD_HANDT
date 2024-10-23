@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 
 import GiaoVienForm from "../UpdateFormGiaoVien/UpdateFormGiaoVien";
+import { TrungTamAPI, GiaoVienAPI } from "../../lib/API/API";
 
 interface GiaoVien {
   ghi_chu: string;
@@ -37,12 +38,40 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
   const [selectedGiaoVien, setSelectedGiaoVien] = useState<GiaoVien | null>(
     null
   );
+  const [localData, setLocalData] = useState<GiaoVien[]>(data);
 
   const onButtonClick = (giaoVien: GiaoVien, e: React.MouseEvent) => {
     e.stopPropagation();
     setSelectedGiaoVien(giaoVien);
     onOpen();
   };
+
+  const updateGiaoVien = (updatedGiaoVien: GiaoVien) => {
+    const updateBody = {
+      matrungtam: updatedGiaoVien.ma_trung_tam,
+      magiaovien: updatedGiaoVien.ma_giao_vien,
+      tengiaovien: updatedGiaoVien.ten_giao_vien,
+      sodienthoai: updatedGiaoVien.so_dien_thoai,
+      ghichu: updatedGiaoVien.ghi_chu,
+    };
+
+    setLocalData((prevData) =>
+      prevData.map((giaoVien) =>
+        giaoVien.id === updatedGiaoVien.id ? updatedGiaoVien : giaoVien
+      )
+    );
+
+    GiaoVienAPI.updateGiaoVien(updateBody, updatedGiaoVien.id);
+    console.log("Updated giao vien:", updateBody);
+  };
+
+  const handleSaveClick = () => {
+    if (selectedGiaoVien) {
+      updateGiaoVien(selectedGiaoVien);
+      onClose();
+    }
+  };
+
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
@@ -64,12 +93,6 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
               <td>{giaoVien.ghi_chu}</td>
               <td>
                 <Stack direction="row" spacing={4}>
-                  {/*
-													<button onClick={(e) => onButtonClick(giaoVien, e)}>
-														<Edit className="w-5 h-5 mr-2" />
-														<span>Xem chi tiết/Chỉnh sửa</span>
-													</button>
-												*/}
                   <Button
                     leftIcon={<Edit className="w-5 h-5 mr-2" />}
                     backgroundColor="rgb(255, 149, 15)"
@@ -91,13 +114,18 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
             <ModalHeader>Chi tiết giáo viên</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <GiaoVienForm giaoVien={selectedGiaoVien} />
+              {selectedGiaoVien && (
+                <GiaoVienForm
+                  giaoVien={selectedGiaoVien}
+                  onSave={setSelectedGiaoVien}
+                />
+              )}
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="orange" mr={3} onClick={onClose}>
                 Đóng
               </Button>
-              <Button colorScheme="orange" mr={3}>
+              <Button colorScheme="orange" mr={3} onClick={handleSaveClick}>
                 Lưu thông tin
               </Button>
             </ModalFooter>

@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./GiaoVienTable.module.css";
 import { Edit } from "lucide-react";
-import { FormControl, FormLabel, Input, Box, Grid } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Box,
+  Grid,
+  Button,
+} from "@chakra-ui/react";
+
 interface GiaoVien {
   ghi_chu: string;
   id: string;
@@ -13,11 +21,13 @@ interface GiaoVien {
   so_dien_thoai: string;
   ten_giao_vien: string;
 }
+
 interface GiaoVienFormProps {
   giaoVien: GiaoVien;
+  onSave: (giaoVien: GiaoVien) => void;
 }
 
-const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien }) => {
+const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien, onSave }) => {
   const [formValues, setFormValues] = useState(giaoVien);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +37,10 @@ const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien }) => {
       [name]: type === "checkbox" ? checked : value,
     });
   };
+
+  useEffect(() => {
+    onSave(formValues);
+  }, [formValues, onSave]);
 
   return (
     <Box display="flex" flexDirection="column" gap={4}>
