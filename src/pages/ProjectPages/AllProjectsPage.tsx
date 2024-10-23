@@ -123,7 +123,7 @@ const GiaoVienSearchPage: React.FC = () => {
             <SearchBar onSearch={handleSearch} />
           </Box>
         </HStack>
-        <HocVienTable data={members} />
+        <HocVienTable data={members} setData={setMembers} />
       </Box>
     </Box>
   );

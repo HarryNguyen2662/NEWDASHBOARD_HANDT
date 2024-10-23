@@ -120,7 +120,7 @@ const MemberSearchPage: React.FC = () => {
             <SearchBar onSearch={handleSearch} />
           </Box>
         </HStack>
-        <GiaoVienTable data={members} />
+        <GiaoVienTable data={members} setData={setMembers} />
       </Box>
     </Box>
   );

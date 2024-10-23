@@ -31,14 +31,14 @@ interface GiaoVien {
 
 interface GiaoVienTableProps {
   data: GiaoVien[];
+  setData: React.Dispatch<React.SetStateAction<GiaoVien[]>>;
 }
 
-const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
+const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data, setData }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedGiaoVien, setSelectedGiaoVien] = useState<GiaoVien | null>(
     null
   );
-  const [localData, setLocalData] = useState<GiaoVien[]>(data);
 
   const onButtonClick = (giaoVien: GiaoVien, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -55,7 +55,7 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data }) => {
       ghichu: updatedGiaoVien.ghi_chu,
     };
 
-    setLocalData((prevData) =>
+    setData((prevData) =>
       prevData.map((giaoVien) =>
         giaoVien.id === updatedGiaoVien.id ? updatedGiaoVien : giaoVien
       )

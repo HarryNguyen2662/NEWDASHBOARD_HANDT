@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Checkbox,
   FormControl,
@@ -28,9 +28,10 @@ interface HocVien {
 
 interface HocVienFormProps {
   hocVien: HocVien;
+  onSave: (hocvien: HocVien) => void;
 }
 
-const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien }) => {
+const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
   const [formValues, setFormValues] = useState(hocVien);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +41,10 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien }) => {
       [name]: type === "checkbox" ? checked : value,
     });
   };
+
+  useEffect(() => {
+    onSave(formValues);
+  }, [formValues, onSave]);
 
   return (
     <Box display="flex" flexDirection="column" gap={4}>

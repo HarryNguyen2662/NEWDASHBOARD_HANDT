@@ -17,6 +17,7 @@ import {
 import { useFormikContext } from "formik";
 import { FormValues, TextInputData } from "@/types/RegisterPage";
 import HocVienForm from "../UpdateFormHocVien/UpdateFormHocVien";
+import { TrungTamAPI, HocVienAPI } from "../../lib/API/API";
 
 interface HocVien {
   da_tot_nghiep: boolean;
@@ -38,21 +39,47 @@ interface HocVien {
 
 interface HocVienTableProps {
   data: HocVien[];
+  setData: React.Dispatch<React.SetStateAction<HocVien[]>>;
 }
 
-const HocVienTable: React.FC<HocVienTableProps> = ({ data }) => {
+const HocVienTable: React.FC<HocVienTableProps> = ({ data, setData }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedHocVien, setSelectedHocVien] = useState<HocVien | null>(null);
-
-  const handlehocVienClick = (hocVien: HocVien) => {
-    console.log("Giáo viên clicked:", hocVien.ten_hoc_vien);
-    alert(`Giáo viên clicked: ${hocVien.ten_hoc_vien}`);
-  };
 
   const onButtonClick = (hocVien: HocVien, e: React.MouseEvent) => {
     e.stopPropagation();
     setSelectedHocVien(hocVien);
     onOpen();
+  };
+
+  const updateGiaoVien = (updatedGiaoVien: HocVien) => {
+    const updateBody = {
+      mahocvien: updatedGiaoVien.ma_hoc_vien,
+      matrungtam: updatedGiaoVien.ma_trung_tam,
+      magiaovienquanly: updatedGiaoVien.ma_giao_vien_quan_ly,
+      tenhocvien: updatedGiaoVien.ten_hoc_vien,
+      sodienthoai: updatedGiaoVien.so_dien_thoai,
+      email: updatedGiaoVien.email,
+      kichhoat: updatedGiaoVien.kich_hoat,
+      dulieuhoctap: updatedGiaoVien.du_lieu_hoc_tap,
+      datotnghiep: updatedGiaoVien.da_tot_nghiep,
+    };
+
+    setData((prevData) =>
+      prevData.map((hocVien) =>
+        hocVien.id === updatedGiaoVien.id ? updatedGiaoVien : hocVien
+      )
+    );
+
+    HocVienAPI.updateHocVien(updateBody, updatedGiaoVien.id);
+    console.log("Updated hoc vien:", updateBody);
+  };
+
+  const handleSaveClick = () => {
+    if (selectedHocVien) {
+      updateGiaoVien(selectedHocVien);
+      onClose();
+    }
   };
 
   return (
@@ -108,11 +135,19 @@ const HocVienTable: React.FC<HocVienTableProps> = ({ data }) => {
             <ModalHeader>Chi tiết học viên</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <HocVienForm hocVien={selectedHocVien} />
+              {selectedHocVien && (
+                <HocVienForm
+                  hocVien={selectedHocVien}
+                  onSave={setSelectedHocVien}
+                />
+              )}
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="orange" mr={3} onClick={onClose}>
                 Đóng
+              </Button>
+              <Button colorScheme="orange" mr={3} onClick={handleSaveClick}>
+                Lưu thông tin
               </Button>
             </ModalFooter>
           </ModalContent>
