@@ -33,10 +33,17 @@ const Navbar = () => {
           <span className={styles.logoText}>H&T AI TECH</span>
         </ScrollLink>
       </div>
-      <div className={styles.navbarRight}>
-        {loggedInUser ? (
+    </div>
+  );
+};
+
+export default Navbar;
+
+/*
+<div className={styles.navbarRight}>
+        {{loggedInUser ? (
           <div className={styles.loggedInUser}>
-            {/* <div
+            { <div
               className={styles.navButtonContainer}
               onMouseEnter={() => setShowPopup(true)}
               onMouseLeave={() => setShowPopup(false)}
@@ -69,23 +76,20 @@ const Navbar = () => {
                   </Link>
                 </div>
               )}
-            </div> */}
-            {/* <button
+            </div> }
+            { <button
               className={styles.navButton}
               onClick={handleNotificationClick}
             >
               <img src={navbarIcons.notifications} alt="Notifications" />
-            </button> */}
+            </button> }
             <Link to="/trungtam/hoso" className={styles.navButton}>
               <CgProfile size={26} />
-            </Link>
+            </Link>}
           </div>
         ) : (
           <div> </div>
         )}
       </div>
-    </div>
-  );
-};
 
-export default Navbar;
+      */

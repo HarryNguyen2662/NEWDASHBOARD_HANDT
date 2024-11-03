@@ -82,6 +82,17 @@ const HocVienTable: React.FC<HocVienTableProps> = ({ data, setData }) => {
     }
   };
 
+  const handleDeleteClick = async () => {
+    if (selectedHocVien) {
+      await HocVienAPI.deleteHocVien(selectedHocVien.id);
+      setData((prevData) =>
+        prevData.filter((hocVien) => hocVien.id !== selectedHocVien.id)
+      );
+      setSelectedHocVien(null);
+      onClose();
+    }
+  };
+
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
@@ -143,6 +154,9 @@ const HocVienTable: React.FC<HocVienTableProps> = ({ data, setData }) => {
               )}
             </ModalBody>
             <ModalFooter>
+              <Button colorScheme="red" mr={3} onClick={handleDeleteClick}>
+                Xóa giáo viên
+              </Button>
               <Button colorScheme="orange" mr={3} onClick={onClose}>
                 Đóng
               </Button>

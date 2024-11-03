@@ -10,15 +10,48 @@ import {
   TagLabel,
   TagCloseButton,
 } from "@chakra-ui/react";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import FilterSection from "../../components/Filter/MultiSelectFilter";
+import MemberCard from "../../components/MemberCard/MemberCard";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import HocVienTable from "../../components/HocVienTable/HocVienTable";
-import { HocVienAPI, TrungTamAPI } from "../../lib/API/API";
+import { TrungTamAPI, HocVienAPI } from "../../lib/API/API";
+import { globalStore } from "../../globalsvar";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+import HocVienForm from "../../components/UpdateFormHocVien/UpdateFormHocVien";
 
 //import { supabase } from "@/lib/supabase";
 //import searchingfunction from "../../services/searching";
 
 import { createClient } from "@supabase/supabase-js";
+
+interface HocVien {
+  da_tot_nghiep: boolean;
+  du_lieu_hoc_tap: {
+    du_lieu: string;
+  };
+  email: string;
+  id: string;
+  kich_hoat: boolean;
+  ma_giao_vien_quan_ly: string;
+  ma_hoc_vien: string;
+  ma_trung_tam: string;
+  ngay_gio_cap_nhat: string;
+  ngay_tao: string;
+  password: string;
+  so_dien_thoai: string;
+  ten_hoc_vien: string;
+}
 
 interface Option {
   value: string;
@@ -28,6 +61,7 @@ interface Option {
 const generateMembers = async (searching_data?: any[]) => {
   //let email = globalStore.get<string>("Main_Email");
   if (searching_data && searching_data.length > 0) return searching_data;
+  // biome-ignore lint/style/noUselessElse: <explanation>
   else {
     const id = localStorage.getItem("Main_Id") || "";
     const result = await TrungTamAPI.getTrungTamLISTHS(id);
@@ -35,11 +69,13 @@ const generateMembers = async (searching_data?: any[]) => {
   }
 };
 
-const GiaoVienSearchPage: React.FC = () => {
+const AllProjectsPage: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<Option[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [selectedInterest, setSelectedInterest] = useState<string | null>(null);
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const [selectedHocVien, setSelectedHocVien] = useState<HocVien | null>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [members, setMembers] = useState<any[]>([]);
   const parentRef = useRef<HTMLDivElement | null>(null);
 
@@ -96,13 +132,46 @@ const GiaoVienSearchPage: React.FC = () => {
     return result;
   };
 
-  const clearFilters = () => {
-    setSelectedFilters([]);
+  const handleAddHocVien = () => {
+    setSelectedHocVien({
+      da_tot_nghiep: false,
+      du_lieu_hoc_tap: { du_lieu: "" },
+      email: "",
+      id: "",
+      kich_hoat: false,
+      ma_giao_vien_quan_ly: "",
+      ma_hoc_vien: "",
+      ma_trung_tam: localStorage.getItem("Matrungtam") || "",
+      ngay_gio_cap_nhat: "",
+      ngay_tao: "",
+      password: "",
+      so_dien_thoai: "",
+      ten_hoc_vien: "",
+    });
+    onOpen();
   };
 
-  const filteredMembers = selectedInterest
-    ? members.filter((member) => member.interests.includes(selectedInterest))
-    : members;
+  const handleSaveHocVien = async (hocVien: HocVien) => {
+    const updateBody = {
+      matrungtam: hocVien.ma_trung_tam,
+      mahocvien: hocVien.ma_hoc_vien,
+      magiaovienquanly: hocVien.ma_giao_vien_quan_ly,
+      tenhocvien: hocVien.ten_hoc_vien,
+      sodienthoai: hocVien.so_dien_thoai,
+      email: hocVien.email,
+      kichhoat: hocVien.kich_hoat,
+      dulieuhoctap: hocVien.du_lieu_hoc_tap,
+      datotnghiep: hocVien.da_tot_nghiep,
+    };
+
+    try {
+      const newHocVien = await HocVienAPI.createHocVien(updateBody);
+      setMembers([...members, ...newHocVien]);
+      onClose();
+    } catch (error) {
+      console.error("Error adding HocVien:", error);
+    }
+  };
 
   return (
     <Box
@@ -122,11 +191,45 @@ const GiaoVienSearchPage: React.FC = () => {
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
+          <Button onClick={handleAddHocVien}>Thêm Học Viên</Button>
         </HStack>
         <HocVienTable data={members} setData={setMembers} />
       </Box>
+      {selectedHocVien && (
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
+            <ModalHeader>Thêm học viên</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {selectedHocVien && (
+                <HocVienForm
+                  hocVien={selectedHocVien}
+                  onSave={setSelectedHocVien}
+                />
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="orange" mr={3} onClick={onClose}>
+                Đóng
+              </Button>
+              <Button
+                colorScheme="orange"
+                mr={3}
+                onClick={() => {
+                  if (selectedHocVien) {
+                    handleSaveHocVien(selectedHocVien);
+                  }
+                }}
+              >
+                Lưu thông tin
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </Box>
   );
 };
 
-export default GiaoVienSearchPage;
+export default AllProjectsPage;

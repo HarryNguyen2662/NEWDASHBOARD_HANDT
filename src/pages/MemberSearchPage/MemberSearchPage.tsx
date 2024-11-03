@@ -18,11 +18,34 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 import GiaoVienTable from "../../components/GiaoVienTable/GiaoVienTable";
 import { TrungTamAPI, GiaoVienAPI } from "../../lib/API/API";
 import { globalStore } from "../../globalsvar";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+import GiaoVienForm from "../../components/UpdateFormGiaoVien/UpdateFormGiaoVien";
 
 //import { supabase } from "@/lib/supabase";
 //import searchingfunction from "../../services/searching";
 
 import { createClient } from "@supabase/supabase-js";
+
+interface GiaoVien {
+  ghi_chu: string;
+  id: string;
+  ma_giao_vien: string;
+  ma_trung_tam: string;
+  ngay_cap_nhat: string;
+  ngay_tao: string;
+  password: string;
+  so_dien_thoai: string;
+  ten_giao_vien: string;
+}
 
 interface Option {
   value: string;
@@ -45,6 +68,10 @@ const MemberSearchPage: React.FC = () => {
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [selectedInterest, setSelectedInterest] = useState<string | null>(null);
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  const [selectedGiaoVien, setSelectedGiaoVien] = useState<GiaoVien | null>(
+    null
+  );
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [members, setMembers] = useState<any[]>([]);
   const parentRef = useRef<HTMLDivElement | null>(null);
 
@@ -101,6 +128,39 @@ const MemberSearchPage: React.FC = () => {
     return result;
   };
 
+  const handleAddGiaoVien = () => {
+    setSelectedGiaoVien({
+      ghi_chu: "",
+      id: "",
+      ma_giao_vien: "",
+      ma_trung_tam: localStorage.getItem("Matrungtam") || "",
+      ngay_cap_nhat: "",
+      ngay_tao: "",
+      password: "",
+      so_dien_thoai: "",
+      ten_giao_vien: "",
+    });
+    onOpen();
+  };
+
+  const handleSaveGiaoVien = async (giaoVien: GiaoVien) => {
+    const updateBody = {
+      matrungtam: giaoVien.ma_trung_tam,
+      magiaovien: giaoVien.ma_giao_vien,
+      tengiaovien: giaoVien.ten_giao_vien,
+      sodienthoai: giaoVien.so_dien_thoai,
+      ghichu: giaoVien.ghi_chu,
+    };
+
+    try {
+      const newGiaoVien = await GiaoVienAPI.createGiaoVien(updateBody);
+      setMembers([...members, ...newGiaoVien]);
+      onClose();
+    } catch (error) {
+      console.error("Error adding GiaoVien:", error);
+    }
+  };
+
   return (
     <Box
       display="flex"
@@ -119,9 +179,44 @@ const MemberSearchPage: React.FC = () => {
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
+          <Button onClick={handleAddGiaoVien}>Thêm Giáo Viên</Button>
         </HStack>
         <GiaoVienTable data={members} setData={setMembers} />
       </Box>
+      {selectedGiaoVien && (
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
+            <ModalHeader>Thêm giáo viên</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {selectedGiaoVien && (
+                <GiaoVienForm
+                  giaoVien={selectedGiaoVien}
+                  onSave={setSelectedGiaoVien}
+                />
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="orange" mr={3} onClick={onClose}>
+                Đóng
+              </Button>
+              <Button
+                colorScheme="orange"
+                mr={3}
+                onClick={() => {
+                  if (selectedGiaoVien) {
+                    console.log(123123123);
+                    handleSaveGiaoVien(selectedGiaoVien);
+                  }
+                }}
+              >
+                Lưu thông tin
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </Box>
   );
 };

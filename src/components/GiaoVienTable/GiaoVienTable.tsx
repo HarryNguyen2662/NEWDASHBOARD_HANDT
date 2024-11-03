@@ -72,6 +72,17 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data, setData }) => {
     }
   };
 
+  const handleDeleteClick = async () => {
+    if (selectedGiaoVien) {
+      await GiaoVienAPI.deleteGiaoVien(selectedGiaoVien.id);
+      setData((prevData) =>
+        prevData.filter((giaoVien) => giaoVien.id !== selectedGiaoVien.id)
+      );
+      setSelectedGiaoVien(null);
+      onClose();
+    }
+  };
+
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
@@ -122,6 +133,9 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data, setData }) => {
               )}
             </ModalBody>
             <ModalFooter>
+              <Button colorScheme="red" mr={3} onClick={handleDeleteClick}>
+                Xóa giáo viên
+              </Button>
               <Button colorScheme="orange" mr={3} onClick={onClose}>
                 Đóng
               </Button>

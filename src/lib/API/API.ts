@@ -20,7 +20,8 @@ const fetchInstance = async (url: string, options: RequestInit = {}) => {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  return response.json();
+  const text = await response.text();
+  return text ? JSON.parse(text) : {};
 };
 
 export const TrungTamAPI = {
@@ -111,6 +112,15 @@ export const GiaoVienAPI = {
       throw new Error("Failed to search Giao Vien");
     }
   },
+  deleteGiaoVien: async (id: string): Promise<Response> => {
+    try {
+      return await fetchInstance(`/giaovien/${id}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      throw new Error("Failed to delete Giao Vien. Please try again later.");
+    }
+  },
 };
 
 export const HocVienAPI = {
@@ -144,6 +154,15 @@ export const HocVienAPI = {
       });
     } catch (error) {
       throw new Error("Failed to search Hoc Vien");
+    }
+  },
+  deleteHocVien: async (id: string): Promise<Response> => {
+    try {
+      return await fetchInstance(`/hocvien/${id}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      throw new Error("Failed to delete Hoc Vien. Please try again later.");
     }
   },
 };
