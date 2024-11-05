@@ -1,6 +1,6 @@
-# Christians in Web3 Web Application
+# New Dashboard H&T AI Tech
 
-## CW3 Web Application Goal
+## H&T AI Tech Web Application Goal
 
 Develop a user-friendly, scalable web app to streamline the information management and facilitate matching service providers and projects for CW3 members to make impactful connections.
 
