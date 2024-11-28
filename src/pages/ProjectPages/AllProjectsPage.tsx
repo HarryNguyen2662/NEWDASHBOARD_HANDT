@@ -122,9 +122,9 @@ const AllProjectsPage: React.FC = () => {
   const handleSearch = async (query: string) => {
     console.log("Search query:", query);
     console.log("Selected Filters:", selectedFilters);
-    const matrungtam = localStorage.getItem("Matrungtam");
-    console.log(matrungtam);
-    const result = await HocVienAPI.searchingHocVien(query, matrungtam ?? "");
+    const madonvi = localStorage.getItem("Matrungtam");
+    console.log(madonvi);
+    const result = await HocVienAPI.searchingHocVien(query, madonvi ?? "");
     console.log(result);
     const searcheddata = await generateMembers(result);
     setMembers(searcheddata);
@@ -153,7 +153,7 @@ const AllProjectsPage: React.FC = () => {
 
   const handleSaveHocVien = async (hocVien: HocVien) => {
     const updateBody = {
-      matrungtam: hocVien.ma_trung_tam,
+      madonvi: hocVien.ma_trung_tam,
       mahocvien: hocVien.ma_hoc_vien,
       magiaovienquanly: hocVien.ma_giao_vien_quan_ly,
       tenhocvien: hocVien.ten_hoc_vien,
@@ -191,7 +191,6 @@ const AllProjectsPage: React.FC = () => {
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
-          <Button onClick={handleAddHocVien}>Thêm Học Viên</Button>
         </HStack>
         <HocVienTable data={members} setData={setMembers} />
       </Box>

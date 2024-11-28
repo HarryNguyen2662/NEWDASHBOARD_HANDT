@@ -24,7 +24,7 @@ const Sidebar: React.FC = () => {
       icon: (
         <FaThLarge className={styles.icon} style={{ marginLeft: "10px" }} />
       ), // Home icon for "Trung tâm điều khiển"
-      label: "Trung tâm điều khiển",
+      label: "Trang chủ",
     },
     {
       to: "/hocviens",

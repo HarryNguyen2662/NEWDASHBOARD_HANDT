@@ -39,7 +39,7 @@ interface GiaoVien {
   ghi_chu: string;
   id: string;
   ma_giao_vien: string;
-  ma_trung_tam: string;
+  ma_don_vi: string;
   ngay_cap_nhat: string;
   ngay_tao: string;
   password: string;
@@ -118,9 +118,9 @@ const MemberSearchPage: React.FC = () => {
   const handleSearch = async (query: string) => {
     console.log("Search query:", query);
     console.log("Selected Filters:", selectedFilters);
-    const matrungtam = localStorage.getItem("Matrungtam");
-    console.log(matrungtam);
-    const result = await GiaoVienAPI.searchingGiaoVien(query, matrungtam ?? "");
+    const madonvi = localStorage.getItem("Matrungtam");
+    console.log(madonvi);
+    const result = await GiaoVienAPI.searchingGiaoVien(query, madonvi ?? "");
     console.log(result);
     const searcheddata = await generateMembers(result);
     setMembers(searcheddata);
@@ -133,7 +133,7 @@ const MemberSearchPage: React.FC = () => {
       ghi_chu: "",
       id: "",
       ma_giao_vien: "",
-      ma_trung_tam: localStorage.getItem("Matrungtam") || "",
+      ma_don_vi: localStorage.getItem("Matrungtam") || "",
       ngay_cap_nhat: "",
       ngay_tao: "",
       password: "",
@@ -145,7 +145,7 @@ const MemberSearchPage: React.FC = () => {
 
   const handleSaveGiaoVien = async (giaoVien: GiaoVien) => {
     const updateBody = {
-      matrungtam: giaoVien.ma_trung_tam,
+      madonvi: giaoVien.ma_don_vi,
       magiaovien: giaoVien.ma_giao_vien,
       tengiaovien: giaoVien.ten_giao_vien,
       sodienthoai: giaoVien.so_dien_thoai,

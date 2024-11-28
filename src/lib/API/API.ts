@@ -77,6 +77,22 @@ export const TrungTamAPI = {
       throw new Error("Failed to delete Trung Tam");
     }
   },
+
+  getKhoaHocList: async () => {
+    try {
+      return await fetchInstance("/khoahoc");
+    } catch (error) {
+      throw new Error("Failed to load Khoa Hoc list");
+    }
+  },
+
+  getLopHocList: async () => {
+    try {
+      return await fetchInstance("/lophoc");
+    } catch (error) {
+      throw new Error("Failed to load Lop Hoc list");
+    }
+  },
 };
 
 export const GiaoVienAPI = {
@@ -102,11 +118,11 @@ export const GiaoVienAPI = {
       throw new Error("Failed to update Giao Vien");
     }
   },
-  searchingGiaoVien: async (keyword: string, matrungtam: string) => {
+  searchingGiaoVien: async (keyword: string, ma_don_vi: string) => {
     try {
-      return await fetchInstance(`/giaovien/searching`, {
+      return await fetchInstance("/giaovien/searching", {
         method: "POST",
-        body: JSON.stringify({ keyword, matrungtam }),
+        body: JSON.stringify({ keyword, ma_don_vi }),
       });
     } catch (error) {
       throw new Error("Failed to search Giao Vien");
@@ -119,6 +135,14 @@ export const GiaoVienAPI = {
       });
     } catch (error) {
       throw new Error("Failed to delete Giao Vien. Please try again later.");
+    }
+  },
+
+  getGiaoVienList: async () => {
+    try {
+      return await fetchInstance("/giaovien");
+    } catch (error) {
+      throw new Error("Failed to load Giao Vien list");
     }
   },
 };
@@ -146,11 +170,11 @@ export const HocVienAPI = {
       throw new Error("Failed to update Hoc Vien");
     }
   },
-  searchingHocVien: async (keyword: string, matrungtam: string) => {
+  searchingHocVien: async (keyword: string, madonvi: string) => {
     try {
-      return await fetchInstance(`/hocvien/searching`, {
+      return await fetchInstance("/hocvien/searching", {
         method: "POST",
-        body: JSON.stringify({ keyword, matrungtam }),
+        body: JSON.stringify({ keyword, madonvi }),
       });
     } catch (error) {
       throw new Error("Failed to search Hoc Vien");
@@ -163,6 +187,14 @@ export const HocVienAPI = {
       });
     } catch (error) {
       throw new Error("Failed to delete Hoc Vien. Please try again later.");
+    }
+  },
+
+  getHocVienList: async () => {
+    try {
+      return await fetchInstance("/hocvien");
+    } catch (error) {
+      throw new Error("Failed to load Hoc Vien list");
     }
   },
 };

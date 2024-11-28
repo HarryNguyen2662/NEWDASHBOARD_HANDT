@@ -26,7 +26,7 @@ interface TrungTamData {
   email: string;
   ghi_chu: string;
   id: string;
-  ma_trung_tam: string;
+  ma_don_vi: string;
   ngay_cap_nhat: string;
   ngay_cong_tac: string;
   ngay_tao: string;
@@ -40,7 +40,7 @@ const fieldLabels: { [key in keyof TrungTamData]: string } = {
   email: "Email",
   ghi_chu: "Note",
   id: "ID",
-  ma_trung_tam: "Center Code",
+  ma_don_vi: "Center Code",
   ngay_cap_nhat: "Update Date",
   ngay_cong_tac: "Work Date",
   ngay_tao: "Creation Date",
@@ -85,7 +85,7 @@ const ProfilePage = () => {
       editedData
     );*/
     const updateBody = {
-      matrungtam: editedData?.ma_trung_tam,
+      madonvi: editedData?.ma_don_vi,
       tentrungtam: editedData?.ten_trung_tam,
       diachi: editedData?.dia_chi,
       sodienthoai: editedData?.so_dien_thoai,

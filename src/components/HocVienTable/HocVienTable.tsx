@@ -55,7 +55,7 @@ const HocVienTable: React.FC<HocVienTableProps> = ({ data, setData }) => {
   const updateGiaoVien = (updatedGiaoVien: HocVien) => {
     const updateBody = {
       mahocvien: updatedGiaoVien.ma_hoc_vien,
-      matrungtam: updatedGiaoVien.ma_trung_tam,
+      madonvi: updatedGiaoVien.ma_trung_tam,
       magiaovienquanly: updatedGiaoVien.ma_giao_vien_quan_ly,
       tenhocvien: updatedGiaoVien.ten_hoc_vien,
       sodienthoai: updatedGiaoVien.so_dien_thoai,

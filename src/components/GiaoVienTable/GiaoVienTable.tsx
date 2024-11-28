@@ -21,7 +21,7 @@ interface GiaoVien {
   ghi_chu: string;
   id: string;
   ma_giao_vien: string;
-  ma_trung_tam: string;
+  ma_don_vi: string;
   ngay_cap_nhat: string;
   ngay_tao: string;
   password: string;
@@ -48,7 +48,7 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data, setData }) => {
 
   const updateGiaoVien = (updatedGiaoVien: GiaoVien) => {
     const updateBody = {
-      matrungtam: updatedGiaoVien.ma_trung_tam,
+      madonvi: updatedGiaoVien.ma_don_vi,
       magiaovien: updatedGiaoVien.ma_giao_vien,
       tengiaovien: updatedGiaoVien.ten_giao_vien,
       sodienthoai: updatedGiaoVien.so_dien_thoai,
