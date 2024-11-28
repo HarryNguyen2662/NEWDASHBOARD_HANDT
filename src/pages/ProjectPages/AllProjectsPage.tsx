@@ -45,7 +45,7 @@ interface HocVien {
   kich_hoat: boolean;
   ma_giao_vien_quan_ly: string;
   ma_hoc_vien: string;
-  ma_trung_tam: string;
+  ma_don_vi: string;
   ngay_gio_cap_nhat: string;
   ngay_tao: string;
   password: string;
@@ -141,7 +141,7 @@ const AllProjectsPage: React.FC = () => {
       kich_hoat: false,
       ma_giao_vien_quan_ly: "",
       ma_hoc_vien: "",
-      ma_trung_tam: localStorage.getItem("Matrungtam") || "",
+      ma_don_vi: localStorage.getItem("Matrungtam") || "",
       ngay_gio_cap_nhat: "",
       ngay_tao: "",
       password: "",
@@ -153,7 +153,7 @@ const AllProjectsPage: React.FC = () => {
 
   const handleSaveHocVien = async (hocVien: HocVien) => {
     const updateBody = {
-      madonvi: hocVien.ma_trung_tam,
+      madonvi: hocVien.ma_don_vi,
       mahocvien: hocVien.ma_hoc_vien,
       magiaovienquanly: hocVien.ma_giao_vien_quan_ly,
       tenhocvien: hocVien.ten_hoc_vien,

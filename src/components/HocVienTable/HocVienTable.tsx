@@ -29,7 +29,7 @@ interface HocVien {
   kich_hoat: boolean;
   ma_giao_vien_quan_ly: string;
   ma_hoc_vien: string;
-  ma_trung_tam: string;
+  ma_don_vi: string;
   ngay_gio_cap_nhat: string;
   ngay_tao: string;
   password: string;
@@ -55,7 +55,7 @@ const HocVienTable: React.FC<HocVienTableProps> = ({ data, setData }) => {
   const updateGiaoVien = (updatedGiaoVien: HocVien) => {
     const updateBody = {
       mahocvien: updatedGiaoVien.ma_hoc_vien,
-      madonvi: updatedGiaoVien.ma_trung_tam,
+      madonvi: updatedGiaoVien.ma_don_vi,
       magiaovienquanly: updatedGiaoVien.ma_giao_vien_quan_ly,
       tenhocvien: updatedGiaoVien.ten_hoc_vien,
       sodienthoai: updatedGiaoVien.so_dien_thoai,
