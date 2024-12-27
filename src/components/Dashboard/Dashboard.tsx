@@ -26,7 +26,8 @@ const Dashboard: React.FC = () => {
       const email = localStorage.getItem("Main_Email");
       if (email) {
         const datatrungtam = await TrungTamAPI.getTrungTamByEmail(email);
-        setTenTrungTam(datatrungtam[0].ten_trung_tam);
+        console.log(datatrungtam);
+        setTenTrungTam(datatrungtam[0].ten_don_vi);
         try {
           const giaoVienList = await TrungTamAPI.getTrungTamLISTGV(
             datatrungtam[0].id,
@@ -41,8 +42,8 @@ const Dashboard: React.FC = () => {
           //const khoaHocList = await TrungTamAPI.getKhoaHocList();
           //const lopHocList = await TrungTamAPI.getLopHocList();
 
-          setSoLuongGiaoVien(giaoVienList.length);
-          setSoLuongHocVien(hocVienList.length);
+          setSoLuongGiaoVien(giaoVienList.totalitems);
+          setSoLuongHocVien(hocVienList.totalitems);
           //setSoLuongKhoaHoc(khoaHocList.length);
           //setSoLuongLopHoc(lopHocList.length);
         } catch (error) {
