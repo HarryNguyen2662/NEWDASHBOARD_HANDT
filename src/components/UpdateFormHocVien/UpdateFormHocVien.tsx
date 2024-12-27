@@ -18,7 +18,7 @@ interface HocVien {
   kich_hoat: boolean;
   ma_giao_vien_quan_ly: string;
   ma_hoc_vien: string;
-  ma_trung_tam: string;
+  ma_don_vi: string;
   ngay_gio_cap_nhat: string;
   ngay_tao: string;
   password: string;
@@ -105,12 +105,12 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel>Mã trung tâm: {formValues.ma_trung_tam}</FormLabel>
+          <FormLabel>Mã trung tâm: {formValues.ma_don_vi}</FormLabel>
           <Input
             id="ma_trung_tam"
             name="ma_trung_tam"
             type="text"
-            value={formValues.ma_trung_tam}
+            value={formValues.ma_don_vi}
             onChange={handleChange}
             placeholder="Mã trung tâm"
           />

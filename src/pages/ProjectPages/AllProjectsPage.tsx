@@ -4,21 +4,7 @@ import {
   Heading,
   Button,
   HStack,
-  Collapse,
   useMediaQuery,
-  Tag,
-  TagLabel,
-  TagCloseButton,
-} from "@chakra-ui/react";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import FilterSection from "../../components/Filter/MultiSelectFilter";
-import MemberCard from "../../components/MemberCard/MemberCard";
-import { useVirtualizer } from "@tanstack/react-virtual";
-import HocVienTable from "../../components/HocVienTable/HocVienTable";
-import { TrungTamAPI, HocVienAPI } from "../../lib/API/API";
-import { globalStore } from "../../globalsvar";
-import {
   Modal,
   ModalOverlay,
   ModalContent,
@@ -28,12 +14,11 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import HocVienTable from "../../components/HocVienTable/HocVienTable";
+import { TrungTamAPI, HocVienAPI } from "../../lib/API/API";
 import HocVienForm from "../../components/UpdateFormHocVien/UpdateFormHocVien";
-
-//import { supabase } from "@/lib/supabase";
-//import searchingfunction from "../../services/searching";
-
-import { createClient } from "@supabase/supabase-js";
+import { Pagination } from "../../components/Pagination/Pagination";
 
 interface HocVien {
   da_tot_nghiep: boolean;
@@ -59,77 +44,81 @@ interface Option {
 }
 
 const generateMembers = async (searching_data?: any[]) => {
-  //let email = globalStore.get<string>("Main_Email");
   if (searching_data && searching_data.length > 0) return searching_data;
-  // biome-ignore lint/style/noUselessElse: <explanation>
   else {
     const id = localStorage.getItem("Main_Id") || "";
-    const result = await TrungTamAPI.getTrungTamLISTHS(id);
+    const result = await TrungTamAPI.getTrungTamLISTHS(id, 1, 10);
     return result;
   }
 };
 
 const AllProjectsPage: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<Option[]>([]);
-  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
-  const [selectedInterest, setSelectedInterest] = useState<string | null>(null);
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [selectedHocVien, setSelectedHocVien] = useState<HocVien | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [members, setMembers] = useState<any[]>([]);
+  const [members, setMembers] = useState<HocVien[]>([]);
   const parentRef = useRef<HTMLDivElement | null>(null);
-
   const [isLargerThan1900] = useMediaQuery("(min-width: 1900px)");
 
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchMembers = async (page: number, limit: number) => {
+    setIsLoading(true);
+    try {
+      const id = localStorage.getItem("Main_Id") || "";
+      const response = await TrungTamAPI.getTrungTamLISTHS(id, page, limit);
+
+      if (response && "paginatedHocVienArray" in response) {
+        setMembers(response.paginatedHocVienArray);
+        setTotalItems(response.totalitems);
+      } else {
+        setMembers([]);
+        setTotalItems(0);
+      }
+    } catch (error) {
+      console.error("Error fetching members:", error);
+      setMembers([]);
+      setTotalItems(0);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useLayoutEffect(() => {
-    parentRef.current?.scrollTo(0, 0);
+    if (parentRef.current) {
+      parentRef.current.scrollTo(0, 0);
+    }
   }, []);
 
   useLayoutEffect(() => {
-    const fetchMembers = async () => {
-      const members = await generateMembers();
-      setMembers(members);
-    };
-    fetchMembers();
-  }, []);
-
-  const cardWidth = isLargerThan1900
-    ? isFilterOpen
-      ? "25%"
-      : "20%"
-    : isFilterOpen
-    ? "31.46%"
-    : "23.63%";
-
-  const cardHeight = "auto";
-  const rowGap = 20;
-
-  const cardsPerRow = isLargerThan1900
-    ? isFilterOpen
-      ? 4
-      : 5
-    : isFilterOpen
-    ? 3
-    : 4;
-
-  const rowVirtualizer = useVirtualizer({
-    count: Math.ceil(members.length / cardsPerRow),
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 380 + rowGap,
-    overscan: 5,
-  });
+    fetchMembers(currentPage, itemsPerPage);
+  }, [currentPage, itemsPerPage]);
 
   const handleSearch = async (query: string) => {
-    console.log("Search query:", query);
-    console.log("Selected Filters:", selectedFilters);
-    const madonvi = localStorage.getItem("Matrungtam");
-    console.log(madonvi);
-    const result = await HocVienAPI.searchingHocVien(query, madonvi ?? "");
-    console.log(result);
-    const searcheddata = await generateMembers(result);
-    setMembers(searcheddata);
-    setIsFilterOpen(false);
-    return result;
+    setIsLoading(true);
+    try {
+      const madonvi = localStorage.getItem("Matrungtam");
+      const response = await HocVienAPI.searchingHocVien(query, madonvi ?? "");
+
+      if (response && "paginatedHocVienArray" in response) {
+        setMembers(response.paginatedHocVienArray);
+        setTotalItems(response.totalitems);
+      } else {
+        setMembers([]);
+        setTotalItems(0);
+      }
+      setCurrentPage(1);
+    } catch (error) {
+      console.error("Error searching:", error);
+      setMembers([]);
+      setTotalItems(0);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleAddHocVien = () => {
@@ -175,6 +164,7 @@ const AllProjectsPage: React.FC = () => {
 
   return (
     <Box
+      ref={parentRef}
       display="flex"
       flexDirection="row"
       padding="4"
@@ -191,9 +181,21 @@ const AllProjectsPage: React.FC = () => {
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
+          <Button onClick={handleAddHocVien}>Thêm học viên</Button>
         </HStack>
+
         <HocVienTable data={members} setData={setMembers} />
+
+        <Pagination
+          currentPage={currentPage}
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPage}
+          onItemsPerPageChange={setItemsPerPage}
+          totalPages={Math.ceil(totalItems / itemsPerPage)}
+        />
       </Box>
+
       {selectedHocVien && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />

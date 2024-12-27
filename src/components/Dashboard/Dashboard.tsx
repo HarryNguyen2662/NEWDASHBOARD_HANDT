@@ -29,10 +29,14 @@ const Dashboard: React.FC = () => {
         setTenTrungTam(datatrungtam[0].ten_trung_tam);
         try {
           const giaoVienList = await TrungTamAPI.getTrungTamLISTGV(
-            datatrungtam[0].id
+            datatrungtam[0].id,
+            1,
+            10
           );
           const hocVienList = await TrungTamAPI.getTrungTamLISTHS(
-            datatrungtam[0].id
+            datatrungtam[0].id,
+            1,
+            10
           );
           //const khoaHocList = await TrungTamAPI.getKhoaHocList();
           //const lopHocList = await TrungTamAPI.getLopHocList();

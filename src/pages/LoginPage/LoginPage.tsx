@@ -44,8 +44,8 @@ const LoginPage = () => {
           console.log(res);
           localStorage.setItem("Main_Id", res[0].id);
           globalStore.set<string>("Main_Id", res[0].id);
-          localStorage.setItem("Matrungtam", res[0].ma_trung_tam);
-          globalStore.set<string>("Matrungtam", res[0].ma_trung_tam);
+          localStorage.setItem("Matrungtam", res[0].ma_don_vi);
+          globalStore.set<string>("Matrungtam", res[0].ma_don_vi);
         });
         navigate("/");
       } else {

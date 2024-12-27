@@ -41,17 +41,17 @@ export const TrungTamAPI = {
     }
   },
 
-  getTrungTamLISTHS: async (id: string) => {
+  getTrungTamLISTHS: async (id: string, page: number, limit: number) => {
     try {
-      return await fetchInstance(`/trungtam/${id}/listHS`);
+      return await fetchInstance(`/trungtam/${id}/listHS/${page}/${limit}`);
     } catch (error) {
       throw new Error("Failed to load Hoc Vien Trung Tam");
     }
   },
 
-  getTrungTamLISTGV: async (id: string) => {
+  getTrungTamLISTGV: async (id: string, page: number, limit: number) => {
     try {
-      return await fetchInstance(`/trungtam/${id}/listGV`);
+      return await fetchInstance(`/trungtam/${id}/listGV/${page}/${limit}`);
     } catch (error) {
       throw new Error("Failed to load Giao Vien Trung Tam");
     }
