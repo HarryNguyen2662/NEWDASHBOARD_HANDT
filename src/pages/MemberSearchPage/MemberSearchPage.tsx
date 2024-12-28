@@ -106,7 +106,6 @@ const MemberSearchPage: React.FC = () => {
         query,
         madonvi ?? ""
       );
-
       if (response && "paginatedGiaoVienArray" in response) {
         setMembers(response.paginatedGiaoVienArray);
         setTotalItems(response.totalitems);

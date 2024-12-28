@@ -3,6 +3,7 @@ const config = {
 };
 
 const baseUrl = "https://handtaitech-a0952bbd1beb.herokuapp.com/v1";
+//const baseUrl = "http://localhost:3000/v1";
 
 const fetchInstance = async (url: string, options: RequestInit = {}) => {
   const headers = {
