@@ -9,10 +9,11 @@ import Navbar from "./components/Navbar/Navbar";
 import NoPage from "./pages/404Page/NoPage";
 import AuthenticatedRoute from "./components/Routes/AuthenticatedRoute";
 import PublicRoute from "./components/Routes/PublicRoute";
-import SingleProjectPage from "./pages/ProjectPages/SingleProjectPage";
-import AllProjectsPage from "./pages/ProjectPages/AllProjectsPage";
+import SingleProjectPage from "./pages/HocvienPages/SingleProjectPage";
+import AllProjectsPage from "./pages/HocvienPages/HocvienPage";
 import Dashboard from "./components/Dashboard/Dashboard";
-import MemberSearchPage from "./pages/MemberSearchPage/MemberSearchPage";
+import MemberSearchPage from "./pages/GiaoVienPage/GiaovienPage";
+import LophocPage from "./pages/LophocPage/LophocPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="hocviens/:hocvienId" element={<SingleProjectPage />} />
           <Route path="trungtam/hoso" element={<ProfilePage />} />
           <Route path="giaoviens" element={<MemberSearchPage />} />
+          <Route path="lophocs" element={<LophocPage />} />
           {/* <Route path="my-posts" element={<div>Your Posts</div>} /> */}
         </Route>
 

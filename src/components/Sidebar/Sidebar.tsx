@@ -6,6 +6,9 @@ import {
   FaFileAlt,
   FaThLarge,
 } from "react-icons/fa";
+
+import { MdClass } from "react-icons/md";
+
 import styles from "./Sidebar.module.css";
 import { useAuth } from "../../hooks/useAuth";
 import * as navbarIcons from "../../assets/navbar";
@@ -45,6 +48,11 @@ const Sidebar: React.FC = () => {
         />
       ), // Teacher icon for "Danh sách giáo viên"
       label: "Danh sách giáo viên",
+    },
+    {
+      to: "/lophocs",
+      icon: <MdClass className={styles.icon} style={{ marginLeft: "10px" }} />, // Graduate icon for "Danh sách lop hoc"
+      label: "Danh sách lớp học",
     },
     {
       to: "/trungtam/hoso",

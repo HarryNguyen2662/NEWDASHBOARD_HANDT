@@ -19,22 +19,22 @@ import {
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import GiaoVienTable from "../../components/GiaoVienTable/GiaoVienTable";
-import { TrungTamAPI, GiaoVienAPI } from "../../lib/API/API";
-import GiaoVienForm from "../../components/UpdateFormGiaoVien/UpdateFormGiaoVien";
+import LopHocTable from "../../components/LopHocTable/LopHocTable";
+import { TrungTamAPI, LopHocAPI } from "../../lib/API/API";
+import LopHocForm from "../../components/UpdateFormLopHoc/UpdateFormLopHoc";
 import { Pagination } from "../../components/Pagination/Pagination";
 
 // Types
-interface GiaoVien {
-  ghi_chu: string;
+interface LopHoc {
   id: string;
-  ma_giao_vien: string;
   ma_don_vi: string;
-  ngay_cap_nhat: string;
+  ma_khoa_hoc: string;
+  ma_lop_hoc: string;
+  thong_tin_lop_hoc: string;
+  thoi_gian_bat_dau: string;
   ngay_tao: string;
-  password: string;
-  so_dien_thoai: string;
-  ten_giao_vien: string;
+  ngay_gio_cap_nhat: string;
+  kich_hoat: boolean;
 }
 
 interface Option {
@@ -43,45 +43,43 @@ interface Option {
 }
 
 // Helper function
-const generateMembers = async (searching_data?: any[]) => {
+const generateClasses = async (searching_data?: any[]) => {
   if (searching_data && searching_data.length > 0) return searching_data;
   else {
     const id = localStorage.getItem("Main_Id") || "";
-    const result = await TrungTamAPI.getTrungTamLISTGV(id, 1, 10);
+    const result = await TrungTamAPI.getTrungTamLISTLH(id, 1, 10);
     return result;
   }
 };
 
 // Main Component
-const MemberSearchPage: React.FC = () => {
-  const [members, setMembers] = useState<GiaoVien[]>([]);
+const LophocPage: React.FC = () => {
+  const [classes, setClasses] = useState<LopHoc[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedGiaoVien, setSelectedGiaoVien] = useState<GiaoVien | null>(
-    null
-  );
+  const [selectedLopHoc, setSelectedLopHoc] = useState<LopHoc | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const parentRef = useRef<HTMLDivElement | null>(null);
   const [isLargerThan1900] = useMediaQuery("(min-width: 1900px)");
 
-  const fetchMembers = async (page: number, limit: number) => {
+  const fetchClasses = async (page: number, limit: number) => {
     setIsLoading(true);
     try {
       const id = localStorage.getItem("Main_Id") || "";
-      const response = await TrungTamAPI.getTrungTamLISTGV(id, page, limit);
+      const response = await TrungTamAPI.getTrungTamLISTLH(id, page, limit);
 
-      if (response && "paginatedGiaoVienArray" in response) {
-        setMembers(response.paginatedGiaoVienArray);
+      if (response && "paginatedLopHocArray" in response) {
+        setClasses(response.paginatedLopHocArray);
         setTotalItems(response.totalitems);
       } else {
-        setMembers([]);
+        setClasses([]);
         setTotalItems(0);
       }
     } catch (error) {
-      console.error("Error fetching members:", error);
-      setMembers([]);
+      console.error("Error fetching classes:", error);
+      setClasses([]);
       setTotalItems(0);
     } finally {
       setIsLoading(false);
@@ -95,64 +93,61 @@ const MemberSearchPage: React.FC = () => {
   }, []);
 
   useLayoutEffect(() => {
-    fetchMembers(currentPage, itemsPerPage);
+    fetchClasses(currentPage, itemsPerPage);
   }, [currentPage, itemsPerPage]);
 
   const handleSearch = async (query: string) => {
     setIsLoading(true);
     try {
       const madonvi = localStorage.getItem("Matrungtam");
-      const response = await GiaoVienAPI.searchingGiaoVien(
-        query,
-        madonvi ?? ""
-      );
-      if (response && "paginatedGiaoVienArray" in response) {
-        setMembers(response.paginatedGiaoVienArray);
+      const response = await LopHocAPI.searchingLopHoc(query, madonvi ?? "");
+      if (response && "paginatedLophocArray" in response) {
+        setClasses(response.paginatedLophocArray);
         setTotalItems(response.totalitems);
       } else {
-        setMembers([]);
+        setClasses([]);
         setTotalItems(0);
       }
       setCurrentPage(1);
     } catch (error) {
       console.error("Error searching:", error);
-      setMembers([]);
+      setClasses([]);
       setTotalItems(0);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleAddGiaoVien = () => {
-    setSelectedGiaoVien({
-      ghi_chu: "",
+  const handleAddLopHoc = () => {
+    setSelectedLopHoc({
       id: "",
-      ma_giao_vien: "",
       ma_don_vi: localStorage.getItem("Matrungtam") || "",
-      ngay_cap_nhat: "",
+      ma_khoa_hoc: "",
+      ma_lop_hoc: "",
+      thong_tin_lop_hoc: "",
+      thoi_gian_bat_dau: "",
       ngay_tao: "",
-      password: "",
-      so_dien_thoai: "",
-      ten_giao_vien: "",
+      ngay_gio_cap_nhat: "",
+      kich_hoat: true,
     });
     onOpen();
   };
 
-  const handleSaveGiaoVien = async (giaoVien: GiaoVien) => {
+  const handleSaveLopHoc = async (lopHoc: LopHoc) => {
     try {
       const updateBody = {
-        madonvi: giaoVien.ma_don_vi,
-        magiaovien: giaoVien.ma_giao_vien,
-        tengiaovien: giaoVien.ten_giao_vien,
-        sodienthoai: giaoVien.so_dien_thoai,
-        ghichu: giaoVien.ghi_chu,
+        madonvi: lopHoc.ma_don_vi,
+        makhoahoc: lopHoc.ma_khoa_hoc,
+        malophoc: lopHoc.ma_lop_hoc,
+        thongtinlophoc: lopHoc.thong_tin_lop_hoc,
+        thoigianbatdau: lopHoc.thoi_gian_bat_dau,
       };
 
-      await GiaoVienAPI.createGiaoVien(updateBody);
-      await fetchMembers(currentPage, itemsPerPage);
+      await LopHocAPI.createLopHoc(updateBody);
+      await fetchClasses(currentPage, itemsPerPage);
       onClose();
     } catch (error) {
-      console.error("Error adding GiaoVien:", error);
+      console.error("Error adding LopHoc:", error);
     }
   };
 
@@ -168,17 +163,17 @@ const MemberSearchPage: React.FC = () => {
     >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
         <Heading as="h1" size="xl" marginBottom="6">
-          Danh sách giáo viên
+          Danh sách lớp học
         </Heading>
 
         <HStack marginX="2" marginBottom="4">
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
-          <Button onClick={handleAddGiaoVien}>Thêm Giáo Viên</Button>
+          <Button onClick={handleAddLopHoc}>Thêm Lớp Học</Button>
         </HStack>
 
-        <GiaoVienTable data={members} setData={setMembers} />
+        <LopHocTable data={classes} setData={setClasses} />
 
         <Pagination
           currentPage={currentPage}
@@ -190,17 +185,14 @@ const MemberSearchPage: React.FC = () => {
         />
       </Box>
 
-      {selectedGiaoVien && (
+      {selectedLopHoc && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
-            <ModalHeader>Thêm giáo viên</ModalHeader>
+            <ModalHeader>Thêm lớp học</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <GiaoVienForm
-                giaoVien={selectedGiaoVien}
-                onSave={setSelectedGiaoVien}
-              />
+              <LopHocForm lopHoc={selectedLopHoc} onSave={setSelectedLopHoc} />
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="orange" mr={3} onClick={onClose}>
@@ -210,8 +202,8 @@ const MemberSearchPage: React.FC = () => {
                 colorScheme="orange"
                 mr={3}
                 onClick={() => {
-                  if (selectedGiaoVien) {
-                    handleSaveGiaoVien(selectedGiaoVien);
+                  if (selectedLopHoc) {
+                    handleSaveLopHoc(selectedLopHoc);
                   }
                 }}
               >
@@ -225,4 +217,4 @@ const MemberSearchPage: React.FC = () => {
   );
 };
 
-export default MemberSearchPage;
+export default LophocPage;

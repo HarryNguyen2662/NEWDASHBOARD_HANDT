@@ -57,6 +57,15 @@ export const TrungTamAPI = {
       throw new Error("Failed to load Giao Vien Trung Tam");
     }
   },
+
+  getTrungTamLISTLH: async (id: string, page: number, limit: number) => {
+    try {
+      return await fetchInstance(`/trungtam/${id}/listLH/${page}/${limit}`);
+    } catch (error) {
+      throw new Error("Failed to load Giao Vien Trung Tam");
+    }
+  },
+
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   updateTrungTam: async (id: string, body: any) => {
     try {
@@ -196,6 +205,75 @@ export const HocVienAPI = {
       return await fetchInstance("/hocvien");
     } catch (error) {
       throw new Error("Failed to load Hoc Vien list");
+    }
+  },
+};
+
+export const LopHocAPI = {
+  createLopHoc: async (lopHocBody: any) => {
+    try {
+      return await fetchInstance("/lophoc", {
+        method: "POST",
+        body: JSON.stringify(lopHocBody),
+      });
+    } catch (error) {
+      throw new Error("Failed to create Lop Hoc");
+    }
+  },
+
+  getLopHoc: async () => {
+    try {
+      return await fetchInstance("/lophoc");
+    } catch (error) {
+      throw new Error("Failed to load Lop Hoc");
+    }
+  },
+
+  getLopHocById: async (id: string) => {
+    try {
+      return await fetchInstance(`/lophoc/${id}`);
+    } catch (error) {
+      throw new Error("Failed to load Lop Hoc by Id");
+    }
+  },
+
+  updateLopHoc: async (id: string, lopHocBody: any) => {
+    try {
+      return await fetchInstance(`/lophoc/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(lopHocBody),
+      });
+    } catch (error) {
+      throw new Error("Failed to update Lop Hoc");
+    }
+  },
+
+  deleteLopHoc: async (id: string) => {
+    try {
+      return await fetchInstance(`/lophoc/${id}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      throw new Error("Failed to delete Lop Hoc");
+    }
+  },
+
+  authLopHoc: async (maLopHoc: string) => {
+    try {
+      return await fetchInstance(`/lophoc/authlophoc/${maLopHoc}`);
+    } catch (error) {
+      throw new Error("Failed to authenticate Lop Hoc");
+    }
+  },
+
+  searchingLopHoc: async (keyword: string, ma_don_vi: string) => {
+    try {
+      return await fetchInstance("/lophoc/searching", {
+        method: "POST",
+        body: JSON.stringify({ keyword, ma_don_vi }),
+      });
+    } catch (error) {
+      throw new Error("Failed to search Lop Hoc");
     }
   },
 };
