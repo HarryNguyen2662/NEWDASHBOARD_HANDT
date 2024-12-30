@@ -2,8 +2,8 @@ const config = {
   apiKey: process.env.REACT_APP_API_KEY,
 };
 
-const baseUrl = "https://handtaitech-a0952bbd1beb.herokuapp.com/v1";
-//const baseUrl = "http://localhost:3000/v1";
+//const baseUrl = "https://handtaitech-a0952bbd1beb.herokuapp.com/v1";
+const baseUrl = "http://localhost:3000/v1";
 
 const fetchInstance = async (url: string, options: RequestInit = {}) => {
   const headers = {
@@ -62,7 +62,15 @@ export const TrungTamAPI = {
     try {
       return await fetchInstance(`/trungtam/${id}/listLH/${page}/${limit}`);
     } catch (error) {
-      throw new Error("Failed to load Giao Vien Trung Tam");
+      throw new Error("Failed to load Lop Hoc Trung Tam");
+    }
+  },
+
+  getTrungTamLISTKH: async (id: string, page: number, limit: number) => {
+    try {
+      return await fetchInstance(`/trungtam/${id}/listKH/${page}/${limit}`);
+    } catch (error) {
+      throw new Error("Failed to load Khoa Hoc Trung Tam");
     }
   },
 
@@ -274,6 +282,66 @@ export const LopHocAPI = {
       });
     } catch (error) {
       throw new Error("Failed to search Lop Hoc");
+    }
+  },
+};
+export const KhoaHocAPI = {
+  createKhoaHoc: async (khoaHocBody: any) => {
+    try {
+      return await fetchInstance("/khoahoc", {
+        method: "POST",
+        body: JSON.stringify(khoaHocBody),
+      });
+    } catch (error) {
+      throw new Error("Failed to create Khoa Hoc");
+    }
+  },
+
+  getKhoaHoc: async () => {
+    try {
+      return await fetchInstance("/khoahoc");
+    } catch (error) {
+      throw new Error("Failed to load Khoa Hoc");
+    }
+  },
+
+  getKhoaHocById: async (id: string) => {
+    try {
+      return await fetchInstance(`/khoahoc/${id}`);
+    } catch (error) {
+      throw new Error("Failed to load Khoa Hoc by Id");
+    }
+  },
+
+  updateKhoaHoc: async (id: string, khoaHocBody: any) => {
+    try {
+      return await fetchInstance(`/khoahoc/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(khoaHocBody),
+      });
+    } catch (error) {
+      throw new Error("Failed to update Khoa Hoc");
+    }
+  },
+
+  deleteKhoaHoc: async (id: string) => {
+    try {
+      return await fetchInstance(`/khoahoc/${id}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      throw new Error("Failed to delete Khoa Hoc");
+    }
+  },
+
+  searchingKhoaHoc: async (keyword: string, ma_don_vi: string) => {
+    try {
+      return await fetchInstance("/khoahoc/searching", {
+        method: "POST",
+        body: JSON.stringify({ keyword, ma_don_vi }),
+      });
+    } catch (error) {
+      throw new Error("Failed to search Khoa Hoc");
     }
   },
 };

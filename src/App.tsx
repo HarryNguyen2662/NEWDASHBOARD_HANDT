@@ -14,6 +14,7 @@ import AllProjectsPage from "./pages/HocvienPages/HocvienPage";
 import Dashboard from "./components/Dashboard/Dashboard";
 import MemberSearchPage from "./pages/GiaoVienPage/GiaovienPage";
 import LophocPage from "./pages/LophocPage/LophocPage";
+import KhoahocPage from "./pages/KhoaHocPages/KhoahocPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="trungtam/hoso" element={<ProfilePage />} />
           <Route path="giaoviens" element={<MemberSearchPage />} />
           <Route path="lophocs" element={<LophocPage />} />
+          <Route path="khoahocs" element={<KhoahocPage />} />
           {/* <Route path="my-posts" element={<div>Your Posts</div>} /> */}
         </Route>
 

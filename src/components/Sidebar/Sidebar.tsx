@@ -7,6 +7,7 @@ import {
   FaThLarge,
 } from "react-icons/fa";
 
+import { SiGoogleclassroom } from "react-icons/si";
 import { MdClass } from "react-icons/md";
 
 import styles from "./Sidebar.module.css";
@@ -53,6 +54,16 @@ const Sidebar: React.FC = () => {
       to: "/lophocs",
       icon: <MdClass className={styles.icon} style={{ marginLeft: "10px" }} />, // Graduate icon for "Danh sách lop hoc"
       label: "Danh sách lớp học",
+    },
+    {
+      to: "/khoahocs",
+      icon: (
+        <SiGoogleclassroom
+          className={styles.icon}
+          style={{ marginLeft: "10px" }}
+        />
+      ), // Graduate icon for "Danh sách khoa hoc"
+      label: "Danh sách khoá học",
     },
     {
       to: "/trungtam/hoso",
