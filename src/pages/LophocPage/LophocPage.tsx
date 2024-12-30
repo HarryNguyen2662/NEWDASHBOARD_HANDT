@@ -142,7 +142,7 @@ const LophocPage: React.FC = () => {
         thongtinlophoc: lopHoc.thong_tin_lop_hoc,
         thoigianbatdau: lopHoc.thoi_gian_bat_dau,
       };
-
+      console.log(updateBody);
       await LopHocAPI.createLopHoc(updateBody);
       await fetchClasses(currentPage, itemsPerPage);
       onClose();
