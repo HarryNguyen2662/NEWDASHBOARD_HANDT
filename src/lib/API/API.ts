@@ -2,8 +2,8 @@ const config = {
   apiKey: process.env.REACT_APP_API_KEY,
 };
 
-//const baseUrl = "https://handtaitech-a0952bbd1beb.herokuapp.com/v1";
-const baseUrl = "http://localhost:3000/v1";
+const baseUrl = "https://handtaitech-a0952bbd1beb.herokuapp.com/v1";
+//const baseUrl = "http://localhost:3000/v1";
 
 const fetchInstance = async (url: string, options: RequestInit = {}) => {
   const headers = {
