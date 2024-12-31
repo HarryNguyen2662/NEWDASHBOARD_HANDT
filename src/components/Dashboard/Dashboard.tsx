@@ -39,13 +39,23 @@ const Dashboard: React.FC = () => {
             1,
             10
           );
+          const khoaHocList = await TrungTamAPI.getTrungTamLISTKH(
+            datatrungtam[0].id,
+            1,
+            10
+          );
+          const lopHocList = await TrungTamAPI.getTrungTamLISTLH(
+            datatrungtam[0].id,
+            1,
+            10
+          );
           //const khoaHocList = await TrungTamAPI.getKhoaHocList();
           //const lopHocList = await TrungTamAPI.getLopHocList();
 
           setSoLuongGiaoVien(giaoVienList.totalitems);
           setSoLuongHocVien(hocVienList.totalitems);
-          //setSoLuongKhoaHoc(khoaHocList.length);
-          //setSoLuongLopHoc(lopHocList.length);
+          setSoLuongKhoaHoc(khoaHocList.totalitems);
+          setSoLuongLopHoc(lopHocList.totalitems);
         } catch (error) {
           console.error("Failed to fetch counts:", error);
         }
