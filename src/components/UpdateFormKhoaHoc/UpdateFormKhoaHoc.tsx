@@ -27,6 +27,18 @@ interface KhoaHocFormProps {
 const UpdateFormKhoaHoc: React.FC<KhoaHocFormProps> = ({ khoaHoc, onSave }) => {
   const [formValues, setFormValues] = useState(khoaHoc);
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} (24H)`;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormValues({
@@ -79,7 +91,7 @@ const UpdateFormKhoaHoc: React.FC<KhoaHocFormProps> = ({ khoaHoc, onSave }) => {
         </FormControl>
         <FormControl mb={4} width="100%">
           <FormLabel>
-            Thời gian bắt đầu: {formValues.thoi_gian_bat_dau}
+            Thời gian bắt đầu: {formatDate(formValues.thoi_gian_bat_dau)}
           </FormLabel>
           <Input
             id="thoi_gian_bat_dau"

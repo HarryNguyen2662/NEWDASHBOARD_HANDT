@@ -118,7 +118,7 @@ const HocVienTable: React.FC<HocVienTableProps> = ({ data, setData }) => {
               <td>
                 <Checkbox
                   colorScheme="red"
-                  defaultChecked
+                  isChecked={hocVien.kich_hoat}
                   style={{ transform: "scale(0.6)" }}
                 />
               </td>
