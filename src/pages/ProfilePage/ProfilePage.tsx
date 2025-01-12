@@ -80,10 +80,6 @@ const ProfilePage = () => {
     setTrungTamData(editedData);
     setIsEditing(false);
     console.log(editedData);
-    /*await TrungTamAPI.updateTrungTam(
-      localStorage.getItem("Main_Id") || "",
-      editedData
-    );*/
     const updateBody = {
       madonvi: editedData?.ma_don_vi,
       tentrungtam: editedData?.ten_trung_tam,
@@ -123,74 +119,116 @@ const ProfilePage = () => {
     );
   }
 
+  /*
+    <Box
+      display="flex"
+      flexDirection="row"
+      padding="4"
+      margin="0 auto"
+      textAlign="left"
+      height="102vh"
+      bg="#EAE7D6"
+      color="#0C5776"
+*/
+
   return (
-    <Box p={6} maxWidth="800px" margin="auto">
-      <Flex justifyContent="space-between" alignItems="center" mb={6}>
-        <Button
-          leftIcon={<ChevronLeftIcon />}
-          onClick={handleBackClick}
-          variant="ghost"
-        >
-          Back
-        </Button>
-        {!isEditing && (
-          <Button leftIcon={<EditIcon />} onClick={handleEditClick}>
-            Edit Profile
+    <Box
+      bg="#EAE7D6"
+      minHeight="100vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box
+        p={6}
+        maxWidth="800px"
+        width="100%"
+        color="#0C5776"
+        borderRadius="md"
+        boxShadow="lg"
+      >
+        <Flex justifyContent="space-between" alignItems="center" mb={6}>
+          <Button
+            leftIcon={<ChevronLeftIcon />}
+            onClick={handleBackClick}
+            variant="ghost"
+            color="#0C5776"
+          >
+            Back
           </Button>
-        )}
-      </Flex>
+          {!isEditing && (
+            <Button
+              leftIcon={<EditIcon />}
+              onClick={handleEditClick}
+              colorScheme="orange"
+            >
+              Edit Profile
+            </Button>
+          )}
+        </Flex>
 
-      <VStack spacing={6} align="stretch">
-        <Heading as="h1" size="xl" textAlign="center" mb={4}>
-          Center Profile
-        </Heading>
+        <VStack spacing={6} align="stretch">
+          <Heading as="h1" size="xl" textAlign="center" mb={4} color="#0C5776">
+            Center Profile
+          </Heading>
 
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th width="30%">Field</Th>
-              <Th>Value</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {Object.entries(trungtamData).map(([key, value]) => (
-              <Tr key={key}>
-                <Td fontWeight="bold">
-                  {fieldLabels[key as keyof TrungTamData]}
-                </Td>
-                <Td>
-                  {isEditing ? (
-                    <Input
-                      name={key}
-                      value={
-                        editedData ? editedData[key as keyof TrungTamData] : ""
-                      }
-                      onChange={handleInputChange}
-                    />
-                  ) : key === "website" ? (
-                    <Link href={value} isExternal color="blue.500">
-                      {value}
-                    </Link>
-                  ) : (
-                    value
-                  )}
-                </Td>
+          <Table variant="simple" bg="#F8DAD0">
+            <Thead>
+              <Tr>
+                <Th width="30%" color="#0C5776">
+                  Field
+                </Th>
+                <Th color="#0C5776">Value</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody>
+              {Object.entries(trungtamData).map(([key, value]) => (
+                <Tr key={key}>
+                  <Td fontWeight="bold" color="#0C5776">
+                    {fieldLabels[key as keyof TrungTamData]}
+                  </Td>
+                  <Td color="#0C5776">
+                    {isEditing ? (
+                      <Input
+                        name={key}
+                        value={
+                          editedData
+                            ? editedData[key as keyof TrungTamData]
+                            : ""
+                        }
+                        onChange={handleInputChange}
+                        color="#0C5776"
+                        backgroundColor="white"
+                      />
+                    ) : key === "website" ? (
+                      <Link href={value} isExternal color="blue.500">
+                        {value}
+                      </Link>
+                    ) : (
+                      value
+                    )}
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
 
-        {isEditing && (
-          <Flex justifyContent="flex-end" mt={4}>
-            <Button onClick={() => setIsEditing(false)} mr={3}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue" onClick={handleSaveClick}>
-              Save Changes
-            </Button>
-          </Flex>
-        )}
-      </VStack>
+          {isEditing && (
+            <Flex justifyContent="flex-end" mt={4}>
+              <Button
+                onClick={() => setIsEditing(false)}
+                mr={3}
+                colorScheme="gray"
+              >
+                Cancel
+              </Button>
+              <Button colorScheme="orange" onClick={handleSaveClick}>
+                Save Changes
+              </Button>
+            </Flex>
+          )}
+        </VStack>
+      </Box>
     </Box>
   );
 };

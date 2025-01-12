@@ -13,8 +13,7 @@ body {
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  background-image: url("../../assets/background.png");
-  background-size: cover;
+  background-color: #fae0c7; /* Pale peachy cream background */
 }
 
 .mainContainer {
@@ -28,7 +27,7 @@ body {
   flex-shrink: 0;
   padding: 4%;
   padding-bottom: 5%;
-  background-color: #121212; /* Black background */
+  background-color: #2d99ae; /* Fresh teal green background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow */
 }
 
@@ -41,14 +40,14 @@ body {
 .title {
   display: flex;
   flex-direction: column;
-  color: #f7f7f7;
+  color: #fae0c7; /* Pale peachy cream text */
   margin-top: 4%;
   margin-bottom: 2%;
   width: 45%;
 }
 
 .header {
-  color: #f7f7f7;
+  color: #fae0c7; /* Pale peachy cream text */
   font-weight: 600;
   font-size: 2rem; /* Responsive font size */
   margin-top: 2%;
@@ -58,13 +57,11 @@ body {
 }
 
 .title {
-  color: white;
+  color: #fae0c7; /* Pale peachy cream text */
   margin-top: 2%;
   margin-bottom: 8%;
   width: 100%; /* Full width */
   max-width: 400px; /* Max width for larger screens */
-  /* margin-left: auto;
-  margin-right: auto; */
 }
 
 .title label {
@@ -85,11 +82,12 @@ body {
   border-radius: 4px;
   width: 100%; /* Full width */
   height: 40px;
-  border-color: white;
+  border: 1px solid #ffb6af; /* Soft pastel pink border */
   background-color: transparent;
-  color: white;
+  color: #fae0c7; /* Pale peachy cream text */
   padding-left: 10px;
 }
+
 .passwordChecklist {
   margin-bottom: 2rem;
 }
@@ -103,10 +101,10 @@ body {
 }
 
 .buttons button {
-  background-color: #ffa300;
+  background-color: #fbc193; /* Light orange or apricot background */
   border-radius: 4px;
   border: none;
-  color: black;
+  color: #2d99ae; /* Fresh teal green text */
   padding: 10px 30px;
   font-size: 1rem; /* Responsive font size */
   cursor: pointer;
@@ -117,7 +115,7 @@ body {
 }
 
 .buttons button:hover {
-  background-color: #fcb02e;
+  background-color: #ffb6af; /* Soft pastel pink background */
 }
 
 .subtext {
@@ -129,12 +127,12 @@ body {
 }
 
 .subtext label {
-  color: #f7f7f7;
+  color: #fae0c7; /* Pale peachy cream text */
   margin-right: 8px;
 }
 
 .subtext a {
-  color: #ffa300;
+  color: #f28076; /* Warm coral pink text */
   text-decoration: none;
 }
 
@@ -165,8 +163,4 @@ body {
   .buttons button {
     width: 100%;
   }
-
-  /* .buttons {
-    flex-direction: column;
-  } */
 }

@@ -5,7 +5,11 @@
   justify-content: space-between;
   width: 240px;
   height: 100vh;
-  background: linear-gradient(135deg, #121212, #1d1d1d);
+  background: linear-gradient(
+    135deg,
+    #fae0c7,
+    #f8dad0
+  ); /* Brighter gradient background */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -14,10 +18,11 @@
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .mainContent {
   flex: 1;
   padding: 20px;
-  color: #fff; /* White text color */
+  color: #0c5776; /* Rich teal blue text color */
   overflow-y: auto; /* Enable scrolling if content overflows */
 }
 
@@ -45,6 +50,7 @@
 .signoutButton:hover .signoutImageHover {
   display: block;
 }
+
 .sidebarFooter button {
   background: none;
   border: none;
@@ -73,7 +79,7 @@
   align-items: center;
   padding: 10px;
   text-decoration: none;
-  color: white; /* Default color */
+  color: #0c5776; /* Rich teal blue text color */
   transition: color 0.3s, background-color 0.3s; /* Smooth transition */
   position: relative;
   margin-left: 15px;
@@ -86,12 +92,12 @@
 .link:hover,
 .link:focus,
 .link:active {
-  color: rgb(255, 149, 8); /* Color when hovered, focused, or active */
+  color: #ffa300; /* Light orange color when hovered, focused, or active */
   margin-left: 15px;
 }
 
 .active {
-  color: rgb(255, 149, 8); /* Color when active */
+  color: #ffa300; /* Light orange color when active */
 }
 
 .stick {
@@ -108,7 +114,7 @@
 .link:focus .stick,
 .link:active .stick,
 .active .stick {
-  background-color: rgb(255, 149, 8); /* Color of the stick when active */
+  background-color: #ffa300; /* Light orange color of the stick when active */
 }
 
 .sidebarFooter {

@@ -171,9 +171,11 @@ const AllProjectsPage: React.FC = () => {
       margin="0 auto"
       textAlign="left"
       height="102vh"
+      bg="#EAE7D6" /* Pale cyan background */
+      color="#0C5776" /* Rich teal blue text */
     >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
-        <Heading as="h1" size="xl" marginBottom="6">
+        <Heading as="h1" size="xl" marginBottom="6" color="#0C5776">
           Danh sách học viên
         </Heading>
 
@@ -181,7 +183,9 @@ const AllProjectsPage: React.FC = () => {
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
-          <Button onClick={handleAddHocVien}>Thêm học viên</Button>
+          <Button colorScheme="orange" onClick={handleAddHocVien}>
+            Thêm học viên
+          </Button>
         </HStack>
 
         <HocVienTable data={members} setData={setMembers} />
@@ -199,7 +203,7 @@ const AllProjectsPage: React.FC = () => {
       {selectedHocVien && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
+          <ModalContent bg="white" color="#0C5776" maxWidth="50%" width="50%">
             <ModalHeader>Thêm học viên</ModalHeader>
             <ModalCloseButton />
             <ModalBody>

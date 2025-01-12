@@ -4,14 +4,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #121212;
+  background-color: #fae0c7; /* Pale peachy cream background */
   padding: 20px;
   height: 60px;
   position: relative;
 }
 
 .navbarLeft {
-  color: #003049;
+  color: #0c5776; /* Rich teal blue text */
 }
 
 .navbarRight {
@@ -25,7 +25,7 @@
 }
 
 .navbarRight p {
-  color: white;
+  color: #0c5776; /* Rich teal blue text */
 }
 
 .logoContainer {
@@ -41,7 +41,7 @@
 
 .logoText {
   font-size: 30px; /* Điều chỉnh kích thước chữ */
-  color: #fff; /* Màu trắng */
+  color: #0c5776; /* Rich teal blue text */
   margin-left: 10px; /* Khoảng cách giữa logo và chữ */
 }
 
@@ -66,14 +66,8 @@
   border: none;
   cursor: pointer;
   margin-right: 16px;
-  color: white;
+  color: #0c5776; /* Rich teal blue text */
 }
-
-/* .navButton img {
-  width: 40px;
-  height: 40px;
-  position: relative;
-} */
 
 .navButtonContainer:hover .navButton img {
   content: url("../../assets/navbar/new-project-hover.png");
@@ -96,19 +90,19 @@
   top: 40px;
   right: 30px;
   padding: 10px;
-  border: 0.6px solid #4c4c4c;
+  border: 0.6px solid #ffa300; /* Light orange border */
   border-radius: 5px;
   z-index: 1000;
   width: 200px;
-  background-color: #121212; /* Background color */
-  color: #ffffff;
+  background-color: #fff5e1; /* Light cream background */
+  color: #0c5776; /* Rich teal blue text */
 }
 
 .popupMenu a {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #ffffff;
+  color: #0c5776; /* Rich teal blue text */
   font-family: "PP Fraktion Mono", monospace;
   font-size: 16px;
 }
@@ -120,7 +114,7 @@
 }
 
 .popupMenu a:hover {
-  color: #ffa300;
+  color: #ffa300; /* Light orange text */
 }
 
 .popupMenu a:hover .createService {
@@ -133,6 +127,6 @@
 
 .popupMenu hr {
   border: 0;
-  border-top: 1px solid #333333;
+  border-top: 1px solid #ffa300; /* Light orange border */
   margin: 5px 0;
 }

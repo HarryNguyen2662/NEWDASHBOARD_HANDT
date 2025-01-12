@@ -52,10 +52,19 @@ const UpdateFormKhoaHoc: React.FC<KhoaHocFormProps> = ({ khoaHoc, onSave }) => {
   }, [formValues, onSave]);
 
   return (
-    <Box display="flex" flexDirection="column" gap={4}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      gap={4}
+      backgroundColor="#FAE0C7"
+      p={4}
+      borderRadius="md"
+    >
       <Grid templateColumns="repeat(2, 1fr)" gap={4}>
         <FormControl mb={4} width="100%">
-          <FormLabel>Mã đơn vị: {formValues.ma_don_vi}</FormLabel>
+          <FormLabel color="#0C5776">
+            Mã đơn vị: {formValues.ma_don_vi}
+          </FormLabel>
           <Input
             id="ma_don_vi"
             name="ma_don_vi"
@@ -63,10 +72,14 @@ const UpdateFormKhoaHoc: React.FC<KhoaHocFormProps> = ({ khoaHoc, onSave }) => {
             value={formValues.ma_don_vi}
             onChange={handleChange}
             placeholder="Mã đơn vị"
+            backgroundColor="white"
+            color="#0C5776"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel>Mã khóa học: {formValues.ma_khoa_hoc}</FormLabel>
+          <FormLabel color="#0C5776">
+            Mã khóa học: {formValues.ma_khoa_hoc}
+          </FormLabel>
           <Input
             id="ma_khoa_hoc"
             name="ma_khoa_hoc"
@@ -74,10 +87,12 @@ const UpdateFormKhoaHoc: React.FC<KhoaHocFormProps> = ({ khoaHoc, onSave }) => {
             value={formValues.ma_khoa_hoc}
             onChange={handleChange}
             placeholder="Mã khóa học"
+            backgroundColor="white"
+            color="#0C5776"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel>
+          <FormLabel color="#0C5776">
             Thông tin khóa học: {formValues.thong_tin_khoa_hoc}
           </FormLabel>
           <Input
@@ -87,10 +102,12 @@ const UpdateFormKhoaHoc: React.FC<KhoaHocFormProps> = ({ khoaHoc, onSave }) => {
             value={formValues.thong_tin_khoa_hoc}
             onChange={handleChange}
             placeholder="Thông tin khóa học"
+            backgroundColor="white"
+            color="#0C5776"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel>
+          <FormLabel color="#0C5776">
             Thời gian bắt đầu: {formatDate(formValues.thoi_gian_bat_dau)}
           </FormLabel>
           <Input
@@ -100,15 +117,19 @@ const UpdateFormKhoaHoc: React.FC<KhoaHocFormProps> = ({ khoaHoc, onSave }) => {
             value={formValues.thoi_gian_bat_dau}
             onChange={handleChange}
             placeholder="Thời gian bắt đầu"
+            backgroundColor="white"
+            color="#0C5776"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel>Kích hoạt</FormLabel>
+          <FormLabel color="#0C5776">Kích hoạt</FormLabel>
           <Checkbox
             id="kich_hoat"
             name="kich_hoat"
             isChecked={formValues.kich_hoat}
             onChange={handleChange}
+            color="#0C5776"
+            bg="white"
           >
             {formValues.kich_hoat ? "Có" : "Không"}
           </Checkbox>

@@ -160,9 +160,11 @@ const LophocPage: React.FC = () => {
       margin="0 auto"
       textAlign="left"
       height="102vh"
+      bg="#EAE7D6" /* Pale cyan background */
+      color="#0C5776" /* Rich teal blue text */
     >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
-        <Heading as="h1" size="xl" marginBottom="6">
+        <Heading as="h1" size="xl" marginBottom="6" color="#0C5776">
           Danh sách lớp học
         </Heading>
 
@@ -170,7 +172,9 @@ const LophocPage: React.FC = () => {
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
-          <Button onClick={handleAddLopHoc}>Thêm Lớp Học</Button>
+          <Button colorScheme="orange" onClick={handleAddLopHoc}>
+            Thêm Lớp Học
+          </Button>
         </HStack>
 
         <LopHocTable data={classes} setData={setClasses} />
@@ -188,7 +192,7 @@ const LophocPage: React.FC = () => {
       {selectedLopHoc && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
+          <ModalContent bg="white" color="#0C5776" maxWidth="50%" width="50%">
             <ModalHeader>Thêm lớp học</ModalHeader>
             <ModalCloseButton />
             <ModalBody>

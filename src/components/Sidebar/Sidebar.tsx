@@ -97,12 +97,12 @@ const Sidebar: React.FC = () => {
           className={styles.signoutButton}
         >
           <img
-            src={navbarIcons.signoutUnselected}
+            src={navbarIcons.signoutSelected}
             alt="Signout"
             className={styles.signoutImage}
           />
           <img
-            src={navbarIcons.signoutSelected}
+            src={navbarIcons.signoutUnselected}
             alt="Signout"
             className={styles.signoutImageHover}
           />

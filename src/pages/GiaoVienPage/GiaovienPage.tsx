@@ -165,9 +165,11 @@ const GiaovienPage: React.FC = () => {
       margin="0 auto"
       textAlign="left"
       height="102vh"
+      bg="#EAE7D6" /* Pale cyan background */
+      color="#0C5776" /* Rich teal blue text */
     >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
-        <Heading as="h1" size="xl" marginBottom="6">
+        <Heading as="h1" size="xl" marginBottom="6" color="#0C5776">
           Danh sách giáo viên
         </Heading>
 
@@ -175,7 +177,9 @@ const GiaovienPage: React.FC = () => {
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
-          <Button onClick={handleAddGiaoVien}>Thêm Giáo Viên</Button>
+          <Button colorScheme="orange" onClick={handleAddGiaoVien}>
+            Thêm Giáo Viên
+          </Button>
         </HStack>
 
         <GiaoVienTable data={members} setData={setMembers} />
@@ -193,7 +197,7 @@ const GiaovienPage: React.FC = () => {
       {selectedGiaoVien && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
+          <ModalContent bg="white" color="#0C5776" maxWidth="50%" width="50%">
             <ModalHeader>Thêm giáo viên</ModalHeader>
             <ModalCloseButton />
             <ModalBody>

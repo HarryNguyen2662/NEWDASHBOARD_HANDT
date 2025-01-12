@@ -121,7 +121,7 @@ const GiaoVienTable: React.FC<GiaoVienTableProps> = ({ data, setData }) => {
       {selectedGiaoVien && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
+          <ModalContent bg="white" color="#0C5776" maxWidth="50%" width="50%">
             <ModalHeader>Chi tiết giáo viên</ModalHeader>
             <ModalCloseButton />
             <ModalBody>

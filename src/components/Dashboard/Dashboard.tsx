@@ -49,8 +49,6 @@ const Dashboard: React.FC = () => {
             1,
             10
           );
-          //const khoaHocList = await TrungTamAPI.getKhoaHocList();
-          //const lopHocList = await TrungTamAPI.getLopHocList();
 
           setSoLuongGiaoVien(giaoVienList.totalitems);
           setSoLuongHocVien(hocVienList.totalitems);
@@ -68,29 +66,40 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <Flex direction="column" p={5} bg="black">
-      <Heading fontSize="3xl" color="white" mx={8} mt={6}>
-        Chào mừng đến với {tentrungtam}
-      </Heading>
-      <HStack direction="row" spacing={6} mx={8} mt={6}>
-        <NumberChart
-          title="số lượng giáo viên"
-          value={soLuongGiaoVien.toString()}
-        />
-        <NumberChart
-          title="số lượng học viên"
-          value={soLuongHocVien.toString()}
-        />
-        <NumberChart
-          title="số lượng khoá học"
-          value={soLuongKhoaHoc.toString()}
-        />
-        <NumberChart
-          title="số lượng lớp học"
-          value={soLuongLopHoc.toString()}
-        />
-      </HStack>
-    </Flex>
+    <Box
+      display="flex"
+      flexDirection="row"
+      padding="4"
+      margin="0 auto"
+      textAlign="left"
+      height="102vh"
+      bg="#EAE7D6" /* Pale cyan background */
+      color="#0C5776" /* Rich teal blue text */
+    >
+      <Flex direction="column" p={5} bg="#EAE7D6">
+        <Heading fontSize="3xl" color="#0C5776" mx={8} mt={6}>
+          Chào mừng đến với {tentrungtam}
+        </Heading>
+        <HStack direction="row" spacing={6} mx={8} mt={6}>
+          <NumberChart
+            title="số lượng giáo viên"
+            value={soLuongGiaoVien.toString()}
+          />
+          <NumberChart
+            title="số lượng học viên"
+            value={soLuongHocVien.toString()}
+          />
+          <NumberChart
+            title="số lượng khoá học"
+            value={soLuongKhoaHoc.toString()}
+          />
+          <NumberChart
+            title="số lượng lớp học"
+            value={soLuongLopHoc.toString()}
+          />
+        </HStack>
+      </Flex>
+    </Box>
   );
 };
 

@@ -148,9 +148,11 @@ const KhoaHocPage: React.FC = () => {
       margin="0 auto"
       textAlign="left"
       height="102vh"
+      bg="#EAE7D6" /* Pale cyan background */
+      color="#0C5776" /* Rich teal blue text */
     >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
-        <Heading as="h1" size="xl" marginBottom="6">
+        <Heading as="h1" size="xl" marginBottom="6" color="#0C5776">
           Danh sách khóa học
         </Heading>
 
@@ -158,7 +160,9 @@ const KhoaHocPage: React.FC = () => {
           <Box width="100%">
             <SearchBar onSearch={handleSearch} />
           </Box>
-          <Button onClick={handleAddKhoaHoc}>Thêm Khóa Học</Button>
+          <Button colorScheme="orange" onClick={handleAddKhoaHoc}>
+            Thêm Khóa Học
+          </Button>
         </HStack>
 
         <KhoaHocTable data={courses} setData={setCourses} />
@@ -176,7 +180,7 @@ const KhoaHocPage: React.FC = () => {
       {selectedKhoaHoc && (
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent bg="black" color="white" maxWidth="50%" width="50%">
+          <ModalContent bg="white" color="#0C5776" maxWidth="50%" width="50%">
             <ModalHeader>Thêm khóa học</ModalHeader>
             <ModalCloseButton />
             <ModalBody>

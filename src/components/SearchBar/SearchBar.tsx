@@ -38,6 +38,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
         borderRadius="14px"
+        backgroundColor="white" /* Pale cyan background */
+        color="#0C5776" /* Rich teal blue text */
+        _placeholder={{ color: "#0C5776" }} /* Placeholder text color */
       />
       <InputRightElement>
         <IconButton
@@ -47,6 +50,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           onClick={handleClear}
           variant="unstyled"
           display={query ? "flex" : "none"}
+          color="#0C5776" /* Rich teal blue text */
         />
       </InputRightElement>
     </InputGroup>

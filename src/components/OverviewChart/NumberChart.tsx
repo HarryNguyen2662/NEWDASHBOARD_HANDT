@@ -25,17 +25,17 @@ export function NumberChart({
       direction={{ base: "column", sm: "row" }}
       overflow="hidden"
       variant="outline"
-      bg="gray.800"
+      bg="#A4C3A2" /* Light orange or apricot background */
       borderRadius="lg"
-      color="white"
+      color="#4EB09B" /* Fresh teal green text */
     >
       <Stack>
         <CardBody>
-          <Heading fontSize="2xl" color="white" mx={8} mt={6}>
+          <Heading fontSize="2xl" color="#5D7B6F" mx={8} mt={6}>
             {title}
           </Heading>
 
-          <Text fontSize="2xl" color="white" mx={8} mt={6}>
+          <Text fontSize="2xl" color="#5D7B6F" mx={8} mt={6}>
             {value}
           </Text>
         </CardBody>
