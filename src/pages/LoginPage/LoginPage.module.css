@@ -13,7 +13,7 @@ body {
   height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #fae0c7; /* Pale peachy cream background */
+  background: linear-gradient(135deg, #fae0c7, #fbc193); /* Gradient from pale peachy cream to light apricot */
 }
 
 .mainContainer {
@@ -27,7 +27,7 @@ body {
   flex-shrink: 0;
   padding: 4%;
   padding-bottom: 5%;
-  background-color: #2d99ae; /* Fresh teal green background */
+  background: linear-gradient(135deg, #2d99ae, #0c5776); /* Gradient from fresh teal green to rich teal blue */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Shadow */
 }
 

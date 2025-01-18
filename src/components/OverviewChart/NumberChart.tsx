@@ -1,11 +1,9 @@
 import * as React from "react";
 import {
-  Avatar,
   Box,
   Flex,
   Stack,
   Text,
-  Image,
   Heading,
   Card,
   CardBody,
@@ -22,24 +20,24 @@ export function NumberChart({
 }: NumberChartProps): React.JSX.Element {
   return (
     <Card
-      direction={{ base: "column", sm: "row" }}
+      direction="column"
       overflow="hidden"
       variant="outline"
-      bg="#A4C3A2" /* Light orange or apricot background */
+      bg="#0C5776" /* Rich teal blue background */
       borderRadius="lg"
-      color="#4EB09B" /* Fresh teal green text */
+      borderColor="#2D99AE" /* Medium aqua blue border */
+      color="#BCFEFE" /* Pale cyan text */
+      p={4}
+      boxShadow="lg"
     >
-      <Stack>
-        <CardBody>
-          <Heading fontSize="2xl" color="#5D7B6F" mx={8} mt={6}>
-            {title}
-          </Heading>
-
-          <Text fontSize="2xl" color="#5D7B6F" mx={8} mt={6}>
-            {value}
-          </Text>
-        </CardBody>
-      </Stack>
+      <CardBody>
+        <Heading fontSize="xl" color="#F8DAD0" mb={2}>
+          {title}
+        </Heading>
+        <Text fontSize="3xl" fontWeight="bold">
+          {value}
+        </Text>
+      </CardBody>
     </Card>
   );
 }

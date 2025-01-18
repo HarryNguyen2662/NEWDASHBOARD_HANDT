@@ -119,21 +119,9 @@ const ProfilePage = () => {
     );
   }
 
-  /*
-    <Box
-      display="flex"
-      flexDirection="row"
-      padding="4"
-      margin="0 auto"
-      textAlign="left"
-      height="102vh"
-      bg="#EAE7D6"
-      color="#0C5776"
-*/
-
   return (
     <Box
-      bg="#EAE7D6"
+      bg="linear-gradient(135deg, #2D99AE, #0C5776)"
       minHeight="100vh"
       display="flex"
       justifyContent="center"
@@ -146,6 +134,8 @@ const ProfilePage = () => {
         color="#0C5776"
         borderRadius="md"
         boxShadow="lg"
+        bg="#b8d1db"
+        fontFamily='"PP Fraktion Mono", monospace'
       >
         <Flex justifyContent="space-between" alignItems="center" mb={6}>
           <Button
@@ -172,22 +162,22 @@ const ProfilePage = () => {
             Center Profile
           </Heading>
 
-          <Table variant="simple" bg="#F8DAD0">
+          <Table variant="simple" className="table">
             <Thead>
               <Tr>
-                <Th width="30%" color="#0C5776">
+                <Th width="30%" color="#000000">
                   Field
                 </Th>
-                <Th color="#0C5776">Value</Th>
+                <Th color="#000000">Value</Th>
               </Tr>
             </Thead>
             <Tbody>
               {Object.entries(trungtamData).map(([key, value]) => (
                 <Tr key={key}>
-                  <Td fontWeight="bold" color="#0C5776">
+                  <Td fontWeight="bold" color="#000000">
                     {fieldLabels[key as keyof TrungTamData]}
                   </Td>
-                  <Td color="#0C5776">
+                  <Td color="#000000">
                     {isEditing ? (
                       <Input
                         name={key}

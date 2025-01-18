@@ -47,13 +47,13 @@ const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien, onSave }) => {
       display="flex"
       flexDirection="column"
       gap={4}
-      backgroundColor="#FAE0C7"
+      backgroundColor="#b8d1db"
       p={4}
       borderRadius="md"
     >
       <Grid templateColumns="repeat(2, 1fr)" gap={4}>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Tên giáo viên: {formValues.ten_giao_vien}
           </FormLabel>
           <Input
@@ -64,11 +64,11 @@ const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien, onSave }) => {
             onChange={handleChange}
             placeholder="Tên giáo viên"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Mã giáo viên: {formValues.ma_giao_vien}
           </FormLabel>
           <Input
@@ -79,11 +79,11 @@ const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien, onSave }) => {
             onChange={handleChange}
             placeholder="Mã giáo viên"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Số điện thoại: {formValues.so_dien_thoai}
           </FormLabel>
           <Input
@@ -94,11 +94,11 @@ const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien, onSave }) => {
             onChange={handleChange}
             placeholder="Số điện thoại"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Mã trung tâm: {formValues.ma_don_vi}
           </FormLabel>
           <Input
@@ -109,11 +109,11 @@ const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien, onSave }) => {
             onChange={handleChange}
             placeholder="Mã trung tâm"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">Password</FormLabel>
+          <FormLabel color="#000000">Password</FormLabel>
           <Input
             id="password"
             name="password"
@@ -122,7 +122,7 @@ const GiaoVienForm: React.FC<GiaoVienFormProps> = ({ giaoVien, onSave }) => {
             onChange={handleChange}
             placeholder="Password"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
       </Grid>

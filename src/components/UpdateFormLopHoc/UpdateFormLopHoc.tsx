@@ -57,13 +57,13 @@ const UpdateFormLopHoc: React.FC<LopHocFormProps> = ({ lopHoc, onSave }) => {
       display="flex"
       flexDirection="column"
       gap={4}
-      backgroundColor="#FAE0C7"
+      backgroundColor="#b8d1db"
       p={4}
       borderRadius="md"
     >
       <Grid templateColumns="repeat(2, 1fr)" gap={4}>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Mã đơn vị: {formValues.ma_don_vi}
           </FormLabel>
           <Input
@@ -73,12 +73,12 @@ const UpdateFormLopHoc: React.FC<LopHocFormProps> = ({ lopHoc, onSave }) => {
             value={formValues.ma_don_vi}
             onChange={handleChange}
             placeholder="Mã đơn vị"
-            color="#0C5776"
+            color="#000000"
             backgroundColor="white"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Mã khóa học: {formValues.ma_khoa_hoc}
           </FormLabel>
           <Input
@@ -88,12 +88,12 @@ const UpdateFormLopHoc: React.FC<LopHocFormProps> = ({ lopHoc, onSave }) => {
             value={formValues.ma_khoa_hoc}
             onChange={handleChange}
             placeholder="Mã khóa học"
-            color="#0C5776"
+            color="#000000"
             backgroundColor="white"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Mã lớp học: {formValues.ma_lop_hoc}
           </FormLabel>
           <Input
@@ -103,12 +103,12 @@ const UpdateFormLopHoc: React.FC<LopHocFormProps> = ({ lopHoc, onSave }) => {
             value={formValues.ma_lop_hoc}
             onChange={handleChange}
             placeholder="Mã lớp học"
-            color="#0C5776"
+            color="#000000"
             backgroundColor="white"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Thông tin lớp học: {formValues.thong_tin_lop_hoc}
           </FormLabel>
           <Input
@@ -118,12 +118,12 @@ const UpdateFormLopHoc: React.FC<LopHocFormProps> = ({ lopHoc, onSave }) => {
             value={formValues.thong_tin_lop_hoc}
             onChange={handleChange}
             placeholder="Thông tin lớp học"
-            color="#0C5776"
+            color="#000000"
             backgroundColor="white"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Thời gian bắt đầu: {formatDate(formValues.thoi_gian_bat_dau)}
           </FormLabel>
           <Input
@@ -133,18 +133,18 @@ const UpdateFormLopHoc: React.FC<LopHocFormProps> = ({ lopHoc, onSave }) => {
             value={formValues.thoi_gian_bat_dau}
             onChange={handleChange}
             placeholder="Thời gian bắt đầu"
-            color="#0C5776"
+            color="#000000"
             backgroundColor="white"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">Kích hoạt</FormLabel>
+          <FormLabel color="#000000">Kích hoạt</FormLabel>
           <Checkbox
             id="kich_hoat"
             name="kich_hoat"
             isChecked={formValues.kich_hoat}
             onChange={handleChange}
-            color="#0C5776"
+            color="#000000"
             bg="white"
           >
             {formValues.kich_hoat ? "Có" : "Không"}

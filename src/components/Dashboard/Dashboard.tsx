@@ -73,11 +73,11 @@ const Dashboard: React.FC = () => {
       margin="0 auto"
       textAlign="left"
       height="102vh"
-      bg="#EAE7D6" /* Pale cyan background */
+      background="linear-gradient(135deg, #2D99AE, #0C5776)"
       color="#0C5776" /* Rich teal blue text */
     >
-      <Flex direction="column" p={5} bg="#EAE7D6">
-        <Heading fontSize="3xl" color="#0C5776" mx={8} mt={6}>
+      <Flex direction="column" p={5}>
+        <Heading fontSize="3xl" color="#000000" mx={8} mt={6}>
           Chào mừng đến với {tentrungtam}
         </Heading>
         <HStack direction="row" spacing={6} mx={8} mt={6}>
