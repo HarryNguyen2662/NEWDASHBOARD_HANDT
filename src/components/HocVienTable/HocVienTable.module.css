@@ -9,14 +9,14 @@
   margin: 20px 0;
   font-size: 16px;
   text-align: left;
-  background-color: #fae0c7; /* Pale peachy cream background */
+  background-color: #b8d1db; /* Pale peachy cream background */
   font-family: "PP Fraktion Mono", monospace;
 }
 
 .table th,
 .table td {
   padding: 12px 15px;
-  color: #0c5776; /* Rich teal blue text */
+  color: #000000; /* Rich teal blue text */
 }
 
 .table th {

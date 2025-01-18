@@ -58,7 +58,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     <Box mt={4}>
       <HStack spacing={4} justify="space-between" align="center">
         <HStack spacing={2}>
-          <Text color="#0C5776">Rows per page:</Text>
+          <Text color="#000000">Rows per page:</Text>
           <Select
             value={itemsPerPage}
             onChange={(e) => {
@@ -73,7 +73,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             <option value={20}>20</option>
             <option value={50}>50</option>
           </Select>
-          <Text color="#0C5776">
+          <Text color="#000000">
             {totalItems === 0
               ? "No items"
               : `${(currentPage - 1) * itemsPerPage + 1}-${Math.min(

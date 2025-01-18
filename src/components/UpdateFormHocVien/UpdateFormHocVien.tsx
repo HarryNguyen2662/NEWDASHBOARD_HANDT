@@ -51,13 +51,13 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
       display="flex"
       flexDirection="column"
       gap={4}
-      backgroundColor="#FAE0C7"
+      backgroundColor="#b8d1db"
       p={4}
       borderRadius="md"
     >
       <Grid templateColumns="repeat(2, 1fr)" gap={4}>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Tên học viên: {formValues.ten_hoc_vien}
           </FormLabel>
           <Input
@@ -68,11 +68,11 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
             onChange={handleChange}
             placeholder="Tên học viên"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Mã học viên: {formValues.ma_hoc_vien}
           </FormLabel>
           <Input
@@ -83,11 +83,11 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
             onChange={handleChange}
             placeholder="Mã học viên"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Số điện thoại: {formValues.so_dien_thoai}
           </FormLabel>
           <Input
@@ -98,11 +98,11 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
             onChange={handleChange}
             placeholder="Số điện thoại"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">Email: {formValues.email}</FormLabel>
+          <FormLabel color="#000000">Email: {formValues.email}</FormLabel>
           <Input
             id="email"
             name="email"
@@ -111,11 +111,11 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
             onChange={handleChange}
             placeholder="Email"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             MGV quản lý: {formValues.ma_giao_vien_quan_ly}
           </FormLabel>
           <Input
@@ -126,11 +126,11 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
             onChange={handleChange}
             placeholder="MGV quản lý"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">
+          <FormLabel color="#000000">
             Mã trung tâm: {formValues.ma_don_vi}
           </FormLabel>
           <Input
@@ -141,39 +141,39 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
             onChange={handleChange}
             placeholder="Mã trung tâm"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">Đã tốt nghiệp</FormLabel>
+          <FormLabel color="#000000">Đã tốt nghiệp</FormLabel>
           <Checkbox
             id="da_tot_nghiep"
             name="da_tot_nghiep"
             isChecked={formValues.da_tot_nghiep}
             onChange={handleChange}
             colorScheme="teal"
-            color="#0C5776"
+            color="#000000"
             bg="white"
           >
             {formValues.da_tot_nghiep ? "Có" : "Không"}
           </Checkbox>
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">Kích hoạt</FormLabel>
+          <FormLabel color="#000000">Kích hoạt</FormLabel>
           <Checkbox
             id="kich_hoat"
             name="kich_hoat"
             isChecked={formValues.kich_hoat}
             onChange={handleChange}
             colorScheme="teal"
-            color="#0C5776"
+            color="#000000"
             bg="white"
           >
             {formValues.kich_hoat ? "Có" : "Không"}
           </Checkbox>
         </FormControl>
         <FormControl mb={4} width="100%">
-          <FormLabel color="#0C5776">Password</FormLabel>
+          <FormLabel color="#000000">Password</FormLabel>
           <Input
             id="password"
             name="password"
@@ -182,7 +182,7 @@ const HocVienForm: React.FC<HocVienFormProps> = ({ hocVien, onSave }) => {
             onChange={handleChange}
             placeholder="Password"
             backgroundColor="white"
-            color="#0C5776"
+            color="#000000"
           />
         </FormControl>
       </Grid>

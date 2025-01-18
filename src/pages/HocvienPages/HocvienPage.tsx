@@ -171,11 +171,11 @@ const AllProjectsPage: React.FC = () => {
       margin="0 auto"
       textAlign="left"
       height="102vh"
-      bg="#EAE7D6" /* Pale cyan background */
+      background="linear-gradient(135deg, #2D99AE, #0C5776)"
       color="#0C5776" /* Rich teal blue text */
     >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
-        <Heading as="h1" size="xl" marginBottom="6" color="#0C5776">
+        <Heading as="h1" size="xl" marginBottom="6" color="#000000">
           Danh sách học viên
         </Heading>
 

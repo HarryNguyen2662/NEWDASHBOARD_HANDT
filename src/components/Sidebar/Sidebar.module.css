@@ -7,8 +7,8 @@
   height: 100vh;
   background: linear-gradient(
     135deg,
-    #fae0c7,
-    #f8dad0
+    #97BEC6,
+    #034C5F
   ); /* Brighter gradient background */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -79,7 +79,7 @@
   align-items: center;
   padding: 10px;
   text-decoration: none;
-  color: #0c5776; /* Rich teal blue text color */
+  color: #000000; /* Rich teal blue text color */
   transition: color 0.3s, background-color 0.3s; /* Smooth transition */
   position: relative;
   margin-left: 15px;
