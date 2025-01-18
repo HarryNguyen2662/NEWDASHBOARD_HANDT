@@ -152,7 +152,7 @@ const KhoaHocPage: React.FC = () => {
       color="#0C5776" /* Rich teal blue text */
     >
       <Box flex="1" display="flex" flexDirection="column" height="100%">
-        <Heading as="h1" size="xl" marginBottom="6" color="#0C5776">
+        <Heading as="h1" size="xl" marginBottom="6" color="#000000">
           Danh sách khóa học
         </Heading>
 
